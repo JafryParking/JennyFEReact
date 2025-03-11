@@ -13,7 +13,7 @@ export const User = () => {
     useEffect(() => {
         if (id) {
             setGetUrl(`${backendURL}/user/${id}`);
-        } else {setGetUrl(backendURL);}
+        } 
     }, [id]);
 
     // Fetch data when URL changes
@@ -21,6 +21,7 @@ export const User = () => {
         axios.get(getUrl)
             .then(response => {
                 setAllUsers(response.data);
+                console.log(response.data);
             })
             .catch(error => {
                 console.error("Error fetching data:", error);
@@ -32,7 +33,7 @@ export const User = () => {
 
     <h1>{id ? 'User' : 'Users'}</h1>
 
-    <p>{allUsers}</p>
+    <p>{id ? allUsers.userName:allUsers}</p>
     {
         
     
