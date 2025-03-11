@@ -5,7 +5,7 @@ import { backendURL } from '../../config';
 
 export const User = () => {
     let { id } = useParams();
-    console.log(id);
+    
     const [allUsers, setAllUsers] = useState(null);
     const [getUrl, setGetUrl] = useState(backendURL);
     
@@ -13,7 +13,7 @@ export const User = () => {
     useEffect(() => {
         if (id) {
             setGetUrl(`${backendURL}/user/${id}`);
-        }
+        } else {setGetUrl(backendURL);}
     }, [id]);
 
     // Fetch data when URL changes
@@ -30,7 +30,7 @@ export const User = () => {
     return (
         <div>
 
-    <h1>Users</h1>
+    <h1>{id ? 'User' : 'Users'}</h1>
 
     <p>{allUsers}</p>
     {

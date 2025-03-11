@@ -1,4 +1,16 @@
 #root {
-  max-width: 1280px;
+  max-width: 500px;
   margin: 0 auto;
+}
+.left {
+  display: flex;
+  flex-direction: column;
+}
+.right {
+ margin-left: 2em;
+}
+#sitebox {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 }
