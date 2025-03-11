@@ -1,17 +1,18 @@
 import { useParams } from 'react-router';
 import { useState, useEffect } from 'react'
 import axios from 'axios';
+import { backendURL } from '../../config';
 
 export const User = () => {
     let { id } = useParams();
     console.log(id);
     const [allUsers, setAllUsers] = useState(null);
-    const [getUrl, setGetUrl] = useState("https://localhost:7198/");
+    const [getUrl, setGetUrl] = useState(backendURL);
     
     // Update URL when id changes
     useEffect(() => {
         if (id) {
-            setGetUrl(`https://localhost:7198/user/${id}`);
+            setGetUrl(`${backendURL}/user/${id}`);
         }
     }, [id]);
 
@@ -32,6 +33,10 @@ export const User = () => {
     <h1>Users</h1>
 
     <p>{allUsers}</p>
+    {
+        
+    
+    }
         </div>
     )
 }
