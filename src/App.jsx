@@ -1,35 +1,29 @@
-import { useState, useEffect } from 'react'
-import {BrowserRouter, Routes, Route} from 'react-router';
-import './App.css';
-import {Layout} from './components/Layout.jsx';
-import {Home} from './pages/Home.jsx'
-import {User} from './pages/User.jsx';
-import {Park} from './pages/Park.jsx';
-import {Login} from './pages/Login.jsx';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Park from "./pages/Park";
+import Register from "./pages/Register";
+import StartParking from "./pages/StartParking";
+import StopParking from "./pages/StopParking";
+import User from "./pages/User";
+import Navbar from "./components/Navbar";
 
-function App() {
-const [appUser, setAppUser] =  useState({
-  userID: 0, // Default value for an integer
-  name: "", // Default value for a string
-  licencePlate: null, // Use null if the licence plate is optional
-});
-  useEffect(() => {
-    let persisted = sessionStorage.getItem("persistedUser");
-    if(persisted) setAppUser(JSON.parse(persisted));
-  }, []);
-
+const App = () => {
   return (
-      <BrowserRouter>
+    <Router>
+      <Navbar />
       <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<Home appUser={appUser}/>}/>
-          <Route path="login" element= {<Login appUser={appUser} setAppUser={setAppUser} />} />
-          <Route path="user/:id" element={<User />}/>
-          <Route path="park" element={<Park />}/>
-        </Route>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/park" element={<Park />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/start-parking" element={<StartParking />} />
+        <Route path="/stop-parking" element={<StopParking />} />
+        <Route path="/user" element={<User />} />
       </Routes>
-    </BrowserRouter>
-  )
-}
+    </Router>
+  );
+};
 
-export default App
+export default App;
