@@ -1,8 +1,8 @@
-import {NavLink, Outlet} from 'react-router-dom';
+import {NavLink, Outlet} from 'react-router';
 import { useState } from 'react';
-import './Navbar.css'; // Lägg till en CSS-fil för styling
+import '../Navbar.css'; // Lägg till en CSS-fil för styling
 
-export const Layout = () => {
+export const Navbar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
 
     return (

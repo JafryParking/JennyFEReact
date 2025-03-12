@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Home = () => {
+export const Home = () => {
   const [user, setUser] = useState("");
   const [vehicle, setVehicle] = useState("");
   const [parkingSlots, setParkingSlots] = useState(Array(6).fill(""));
@@ -66,4 +66,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+

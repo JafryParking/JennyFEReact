@@ -3,9 +3,9 @@ import {useState} from 'react';
 export const Login = ({appUser,setAppUser}) => {
 
     const refAction =  ({id}, {name}, {car}) => {
-            let newCollection = { userID: {id}, name: {name}, licencePlate: {car} };
+            let newUser = { userID: {id}, name: {name}, licencePlate: {car} };
             setAppUser(prevUser => ({ ...prevUser, userID: 1, name: "John Doe", licencePlate: "ABC123" }));
-            sessionStorage.setItem("persistedUser", JSON.stringify(newCollection));
+            sessionStorage.setItem("persistedUser", JSON.stringify(newUser));
         }
 
 
