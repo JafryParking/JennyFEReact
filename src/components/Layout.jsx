@@ -5,6 +5,9 @@ export const Layout = () => {
         <div id='sitebox'> 
         <div className='left'>
             <NavLink to="/">Home </NavLink>
+            <NavLink to="login"> Login</NavLink>
+          
+            
             <NavLink to="/user/1">User 1 </NavLink>
             <NavLink to="park">Park </NavLink>
         </div>

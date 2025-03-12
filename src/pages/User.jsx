@@ -30,14 +30,8 @@ export const User = () => {
 
     return (
         <div>
-
-    <h1>{id ? 'User' : 'Users'}</h1>
-
-    <p>{id ? allUsers.userName:allUsers}</p>
-    {
-        
-    
-    }
+            <h1>{id ? 'User' : 'Users'}</h1>
+            <p>{id ? allUsers.userName:allUsers}</p>
         </div>
     )
 }
