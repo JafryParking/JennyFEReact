@@ -12,15 +12,16 @@ import Navbar from "./components/Navbar";
 const App = () => {
   return (
     <Router>
-      <Navbar />
+      
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/park" element={<Park />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/start-parking" element={<StartParking />} />
-        <Route path="/stop-parking" element={<StopParking />} />
-        <Route path="/user" element={<User />} />
+        <Route element={<Navbar />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/start-parking" element={<StartParking />} />
+          <Route path="/stop-parking" element={<StopParking />} />
+          <Route path="/user" element={<User />} />
+        </Route>
       </Routes>
     </Router>
   );
