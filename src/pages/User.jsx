@@ -53,8 +53,7 @@ export const User = () => {
 
     return (
         <div>
-            
-            {id && allUsers ? <DisplayUserDetails user={allUsers} /> : '<p></p>Loading...</p>'}
+            {id && allUsers ? <DisplayUserDetails user={allUsers} /> : 'No such user'}
         </div>
     )
 }
