@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Navbar } from "../components/Navbar";
 
 export const Home = () => {
   const [user, setUser] = useState("");
@@ -18,13 +17,11 @@ export const Home = () => {
 
   return (
     <div className="home-container">
-      {/* Navbar */}
-      <Navbar />
+     
 
       {/* Spacer to push content below navbar */}
       <div className="home-content">
-        <h1 className="text-2xl font-bold mb-4 text-center">Jafry Parking App</h1>
-        
+                
         <div className="input-group">
           <span className="text-xl">👤</span>
           <input

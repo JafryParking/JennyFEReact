@@ -13,6 +13,7 @@ export const Navbar = () => {
             </button>
             <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
                 <NavLink to="/" >Home</NavLink>
+                <NavLink to="register" >Register</NavLink>
                 <NavLink to="login" >Login</NavLink>
                 <NavLink to="/user/1">User 1</NavLink>
             </div>

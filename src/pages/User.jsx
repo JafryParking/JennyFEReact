@@ -1,7 +1,8 @@
 import { useParams } from 'react-router';
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useDebugValue } from 'react'
 import axios from 'axios';
 import { backendURL } from '../../config';
+import '../App.css';
 
 export const User = () => {
     let { id } = useParams();
@@ -21,12 +22,23 @@ export const User = () => {
         }
     }, [id]);
     
+    const DisplayUserDetails = ({user}) => {
+        let fee = new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(user.parkingFeesOwed);
+        return (
+            <>
+                <h1>{user.userName}</h1>
+                <div>
+                    <p>User ID: {user.id}</p>
+                    <p>parkingFeesOwed: {fee} kr</p>
+                </div>
+        </>
+        )
+      }
 
     return (
         <div>
-            <h1>{id ? 'User' : 'Users'}</h1>
-            <p>{id && allUsers ? "User: "+allUsers.userName+", User ID: "+allUsers.id+"parkingFeesOwed: "+allUsers.parkingFeesOwed: 'Loading...'}</p>
             
+            {id && allUsers ? <DisplayUserDetails user={allUsers} /> : '<p></p>Loading...</p>'}
         </div>
     )
 }
