@@ -2,7 +2,8 @@ import {NavLink, Outlet} from 'react-router';
 import { useState } from 'react';
 import '../Navbar.css'; // Lägg till en CSS-fil för styling
 
-export const Navbar = () => {
+export const Navbar = ({appUser}) => {
+    (appUser ? console.log(appUser): '');
     const [menuOpen, setMenuOpen] = useState(false);
 
     return (
@@ -15,7 +16,12 @@ export const Navbar = () => {
                 <NavLink to="/" >Home</NavLink>
                 <NavLink to="register" >Register</NavLink>
                 <NavLink to="login" >Login</NavLink>
-                <NavLink to="/user/1">User 1</NavLink>
+                
+                <NavLink to={`/user/${appUser ? appUser.userID: 1}`}>
+                    {appUser ? appUser.userName : 'Not logged in'}</NavLink>
+                
+                <NavLink to="/user/3">User 3</NavLink>
+                
             </div>
             <Outlet />
         </nav>

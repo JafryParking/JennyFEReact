@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState}from "react";
 import { BrowserRouter, Routes, Route } from "react-router";
 import {Home} from "./pages/Home.jsx";
 import {Login} from "./pages/Login.jsx";
@@ -9,13 +9,14 @@ import {User} from "./pages/User.jsx";
 import {Navbar} from "./components/Navbar.jsx";
 
 const App = () => {
+  // needed for Login
+  const [appUser, setAppUser] = useState(null);
   return (
     <BrowserRouter>
-      
       <Routes>
-        <Route element={<Navbar />}>
+        <Route element={<Navbar appUser={appUser}/>}>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login appUser={appUser} setAppUser={setAppUser} />} />
           <Route path="/register" element={<Register />} />
           <Route path="/start-parking" element={<StartParking />} />
           <Route path="/stop-parking" element={<StopParking />} />
