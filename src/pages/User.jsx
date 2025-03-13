@@ -22,15 +22,31 @@ export const User = () => {
         }
     }, [id]);
     
+    const ListAllCars = ({cars}) => {
+        console.log(cars)
+        if (!cars) {
+            return (
+                <div>Add cars</div>
+            );
+        }
+        return (
+            <div id="cars">
+            {cars.map(car => {
+                return (<div class="car">{car.licencePlate}</div>)
+            })}
+        </div>
+        )
+     }
+
     const DisplayUserDetails = ({user}) => {
         let fee = new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(user.parkingFeesOwed);
         return (
             <>
-                <h1>{user.userName}</h1>
+                <h1>({user.id}) {user.userName}</h1>
                 <div>
-                    <p>User ID: {user.id}</p>
                     <p>parkingFeesOwed: {fee} kr</p>
                 </div>
+                {<ListAllCars cars={user.cars} />}
         </>
         )
       }
