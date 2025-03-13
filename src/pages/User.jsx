@@ -14,7 +14,6 @@ export const User = () => {
             axios.get(`${backendURL}/user/${id}`)
                 .then(response => {
                     setAllUsers(response.data);
-                    console.log("Response is", response);
                 })
                 .catch(error => {
                     console.error("Error fetching data:", error);
@@ -26,7 +25,7 @@ export const User = () => {
     return (
         <div>
             <h1>{id ? 'User' : 'Users'}</h1>
-            <p>{id && allUsers ? allUsers.userName : 'Loading...'}</p>
+            <p>{id && allUsers ? "User: "+allUsers.userName+", User ID: "+allUsers.id+"parkingFeesOwed: "+allUsers.parkingFeesOwed: 'Loading...'}</p>
             
         </div>
     )
