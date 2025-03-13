@@ -1,5 +1,5 @@
 export const StartParking = () => {
     return (
-        <h1>Start PArking</h1>
+        <h1>Start Parking</h1>
     )
 }

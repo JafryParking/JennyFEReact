@@ -1,5 +1,6 @@
 import {NavLink, Outlet} from 'react-router';
 import { useState } from 'react';
+import { ParkingP } from './ParkingP';
 import '../Navbar.css'; // Lägg till en CSS-fil för styling
 
 export const Navbar = ({appUser}) => {
@@ -24,8 +25,9 @@ export const Navbar = ({appUser}) => {
         </nav>
         {/* Pages content goes here */}
         <Outlet />
-        {/* Big P parking sign */}
-        <div id="bigP">P</div>
+
+        {/* Big P parking sign - made into a Component*/}
+        <ParkingP />
     </>
     )
 }
