@@ -19,15 +19,17 @@ export const Register = () => {
         }
     }, [newUser]);
 
-    function doit() {
-        // Kommenterar bort så det inte reggas nya användare hela tiden medan jag testar.
-        // setNewUser({username: "Karl", password: "password", email: 'karl@yahoo.se', licensePlate: 'nnn999'});
+    function registerUser() {
+        let hardcodedUser = {username: "Karl", password: "password", email: 'karl@yahoo.se', licensePlate: 'nnn999'}
+        console.log(hardcodedUser);
+                // Kommenterar bort så det inte reggas nya användare hela tiden medan jag testar.
+        // setNewUser(hardcodedUser);
     }
 
     return (
         <div id="registerPage">
             <h1>Register</h1>
-            <button onClick={doit}>REGISTER</button>
+            <button onClick={registerUser}>REGISTER</button>
         </div>
     )
 }

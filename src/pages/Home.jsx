@@ -66,7 +66,8 @@ export const Home = () => {
       </div>
 
       {/* Bakgrundsbokstaven */}
-      <div className="background-text">P</div>
+      {/* Finns nu i NavBar som en component ParkingP istället */}
+      {/* <div className="background-text">P</div> */}
     </div>
   );
 };
