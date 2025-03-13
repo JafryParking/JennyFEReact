@@ -24,17 +24,19 @@ export const User = () => {
     
     const ListAllCars = ({cars}) => {
         console.log(cars)
-        if (!cars) {
+        if (!cars || cars.length < 1) {
             return (
-                <div>Add cars</div>
+                <div>Add cars - print form here</div>
             );
-        }
+        } else
         return (
             <div id="cars">
-            {cars.map(car => {
-                return (<div class="car">{car.licencePlate}</div>)
+            {cars.map(car => { 
+                return (
+                    <div class="car">{car.licencePlate}</div>
+                )
             })}
-        </div>
+           </div>
         )
      }
 
