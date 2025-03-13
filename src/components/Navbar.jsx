@@ -6,6 +6,7 @@ export const Navbar = ({appUser}) => {
     const [menuOpen, setMenuOpen] = useState(false);
 
     return (
+    <>
         <nav className="navbar">
             <div className="logo">Jafry Parking</div>
             <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
@@ -20,7 +21,11 @@ export const Navbar = ({appUser}) => {
                     {appUser ? appUser.userName : 'Not logged in'}</NavLink>
                 
             </div>
-            <Outlet />
         </nav>
+        {/* Pages content goes here */}
+        <Outlet />
+        {/* Big P parking sign */}
+        <div id="bigP">P</div>
+    </>
     )
 }

@@ -3,6 +3,7 @@ import { useState, useEffect, useDebugValue } from 'react'
 import axios from 'axios';
 import { backendURL } from '../../config';
 import '../App.css';
+import styles from './user.module.css';
 
 export const User = () => {
     let { id } = useParams();
@@ -23,7 +24,6 @@ export const User = () => {
     }, [id]);
     
     const ListAllCars = ({cars}) => {
-        console.log(cars)
         if (!cars || cars.length < 1) {
             return (
                 <div>Add cars - print form here</div>
@@ -31,9 +31,9 @@ export const User = () => {
         } else
         return (
             <div id="cars">
-            {cars.map(car => { 
+            {cars.map((car, index) => { 
                 return (
-                    <div class="car">{car.licencePlate}</div>
+                    <div key={index} className={styles.car}>{car.licencePlate}</div>
                 )
             })}
            </div>
@@ -46,7 +46,7 @@ export const User = () => {
             <>
                 <h1>({user.id}) {user.userName}</h1>
                 <div>
-                    <p>parkingFeesOwed: {fee} kr</p>
+                    <p>Parking Fees: {fee} kr</p>
                 </div>
                 {<ListAllCars cars={user.cars} />}
         </>
@@ -54,7 +54,7 @@ export const User = () => {
       }
 
     return (
-        <div>
+        <div className={styles.userPage}>
             {id && allUsers ? <DisplayUserDetails user={allUsers} /> : 'No such user'}
         </div>
     )
