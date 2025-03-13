@@ -7,31 +7,27 @@ export const User = () => {
     let { id } = useParams();
     
     const [allUsers, setAllUsers] = useState(null);
-    const [getUrl, setGetUrl] = useState(backendURL);
-    
+        
     // Update URL when id changes
     useEffect(() => {
         if (id) {
-            setGetUrl(`${backendURL}/user/${id}`);
-        } 
+            axios.get(`${backendURL}/user/${id}`)
+                .then(response => {
+                    setAllUsers(response.data);
+                    console.log("Response is", response);
+                })
+                .catch(error => {
+                    console.error("Error fetching data:", error);
+                });
+        }
     }, [id]);
-
-    // Fetch data when URL changes
-    useEffect(() => {
-        axios.get(getUrl)
-            .then(response => {
-                setAllUsers(response.data);
-                console.log(response.data);
-            })
-            .catch(error => {
-                console.error("Error fetching data:", error);
-            });
-    }, [getUrl]);
+    
 
     return (
         <div>
             <h1>{id ? 'User' : 'Users'}</h1>
-            <p>{id ? allUsers.userName:allUsers}</p>
+            <p>{id && allUsers ? allUsers.userName : 'Loading...'}</p>
+            
         </div>
     )
 }
