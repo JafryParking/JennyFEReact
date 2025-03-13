@@ -3,7 +3,6 @@ import { useState } from 'react';
 import '../Navbar.css'; // Lägg till en CSS-fil för styling
 
 export const Navbar = ({appUser}) => {
-    (appUser ? console.log(appUser): '');
     const [menuOpen, setMenuOpen] = useState(false);
 
     return (
@@ -17,10 +16,8 @@ export const Navbar = ({appUser}) => {
                 <NavLink to="register" >Register</NavLink>
                 <NavLink to="login" >Login</NavLink>
                 
-                <NavLink to={`/user/${appUser ? appUser.userID: 1}`}>
+                <NavLink to={`/user/${appUser ? appUser.userID: 0}`}>
                     {appUser ? appUser.userName : 'Not logged in'}</NavLink>
-                
-                <NavLink to="/user/3">User 3</NavLink>
                 
             </div>
             <Outlet />
