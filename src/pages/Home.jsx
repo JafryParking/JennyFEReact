@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Navbar } from "../components/Navbar";
 
 export const Home = () => {
   const [user, setUser] = useState("");
@@ -16,54 +17,59 @@ export const Home = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-pink-100 p-4">
-      <h1 className="text-2xl font-bold mb-4">Jafry Parking App</h1>
-      
-      <div className="flex items-center mb-2">
-        <span className="text-xl mr-2">👤</span>
-        <input
-          type="text"
-          placeholder="Enter name"
-          value={user}
-          onChange={(e) => setUser(e.target.value)}
-          className="border p-2 rounded w-full"
-        />
-      </div>
-      
-      <div className="mb-2">
-        <input
-          type="text"
-          placeholder="Enter vehicle details"
-          value={vehicle}
-          onChange={(e) => setVehicle(e.target.value)}
-          className="border p-2 rounded w-full"
-        />
-      </div>
-      
-      <div className="flex items-center mb-4">
-        <span className="text-xl mr-2">🚗</span>
-        {parkingSlots.map((slot, index) => (
+    <div className="home-container">
+      {/* Navbar */}
+      <Navbar />
+
+      {/* Spacer to push content below navbar */}
+      <div className="home-content">
+        <h1 className="text-2xl font-bold mb-4 text-center">Jafry Parking App</h1>
+        
+        <div className="input-group">
+          <span className="text-xl">👤</span>
           <input
-            key={index}
             type="text"
-            maxLength="1"
-            value={slot}
-            onChange={(e) => handleSlotChange(index, e.target.value)}
-            className="border p-2 w-10 text-center mx-1"
+            placeholder="Enter name"
+            value={user}
+            onChange={(e) => setUser(e.target.value)}
+            className="input-field"
           />
-        ))}
+        </div>
+        
+        <div className="input-group">
+          <input
+            type="text"
+            placeholder="Enter vehicle details"
+            value={vehicle}
+            onChange={(e) => setVehicle(e.target.value)}
+            className="input-field"
+          />
+        </div>
+        
+        <div className="parking-slots">
+          <span className="text-xl">🚗</span>
+          {parkingSlots.map((slot, index) => (
+            <input
+              key={index}
+              type="text"
+              maxLength="1"
+              value={slot}
+              onChange={(e) => handleSlotChange(index, e.target.value)}
+              className="slot-input"
+            />
+          ))}
+        </div>
+        
+        <button
+          onClick={handleSubmit}
+          className="add-user-btn"
+        >
+          Add user
+        </button>
       </div>
-      
-      <button
-        onClick={handleSubmit}
-        className="bg-gray-400 px-4 py-2 rounded text-white cursor-pointer hover:bg-gray-500"
-      >
-        Add user
-      </button>
-      
-      <div className="absolute bottom-10 text-gray-200 text-9xl font-bold opacity-20">P</div>
+
+      {/* Bakgrundsbokstaven */}
+      <div className="background-text">P</div>
     </div>
   );
 };
-
-
