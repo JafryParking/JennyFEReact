@@ -1,4 +1,4 @@
-import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { NavLink, Outlet, useLocation } from 'react-router';
 import { useState, useEffect } from 'react';
 import { ParkingP } from './ParkingP';
 import '../Navbar.css'; // Lägg till en CSS-fil för styling
