@@ -10,9 +10,8 @@ export const Navbar = ({ appUser }) => {
     
     const LoginOrUserPage = () =>{
         if (appUser){
-            console.log(appUser);
             return (
-                <NavLink to={`user/${appUser.userID}`}>{appUser.userName}</NavLink>)
+                <NavLink to={`user/${appUser.id}`}>{appUser.userName}</NavLink>)
             }
         else {
             return (
