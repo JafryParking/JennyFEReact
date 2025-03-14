@@ -4,14 +4,31 @@ import { ParkingP } from './ParkingP';
 import '../Navbar.css'; // Lägg till en CSS-fil för styling
 
 export const Navbar = ({ appUser }) => {
+    
     const [menuOpen, setMenuOpen] = useState(false);
     const location = useLocation();
-
+    
+    const LoginOrUserPage = () =>{
+        if (appUser){
+            console.log(appUser);
+            return (
+                <NavLink to={`user/${appUser.userID}`}>{appUser.userName}</NavLink>)
+            }
+        else {
+            return (
+                <>
+            <NavLink to="register" >Register</NavLink>
+            <NavLink to="login" >Login</NavLink>
+            </>
+            );
+        }
+    };
     // Stäng menyn vid sidbyte
     useEffect(() => {
         setMenuOpen(false);
     }, [location.pathname]);
 
+    
     return (
     <>
         <nav className="navbar">
@@ -21,12 +38,9 @@ export const Navbar = ({ appUser }) => {
             </button>
             <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
                 <NavLink to="/" >Home</NavLink>
-                <NavLink to="register" >Register</NavLink>
-                <NavLink to="login" >Login</NavLink>
                 
-                <NavLink to={`/user/${appUser ? appUser.userID : 0}`}>
-                    {appUser ? appUser.userName : 'Not logged in'}
-                </NavLink>
+                <LoginOrUserPage />
+            
             </div>
         </nav>
         {/* Pages content goes here */}
