@@ -4,7 +4,6 @@ export const StartParking = ({appUser}) => {
 
     if (appUser) {
     return (
-        
         <>
         <h1>Start Parking</h1>
         {appUser.userName}'s cars:

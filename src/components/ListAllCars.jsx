@@ -5,8 +5,7 @@ const PARKED_CARS_KEY = "parkedCars"; // Key for local storage
 
 export const ListAllCars = ({ appUser, cars }) => {
     const [parkedCars, setParkedCars] = useState({}); // Store parked cars
-    console.log(appUser);
-    
+        
   // Load parked cars from sessionStorage OR appUser when the component mounts
   useEffect(() => {
     const savedParkedCars = sessionStorage.getItem(PARKED_CARS_KEY);
@@ -22,20 +21,13 @@ export const ListAllCars = ({ appUser, cars }) => {
         );
         setParkedCars(parkedCarsFromUser);
         sessionStorage.setItem(PARKED_CARS_KEY, JSON.stringify(parkedCarsFromUser)); // Save immediately
-        
-        
-        console.log("parkedCard", parkedCars);
-
-
-
     }
 }, [appUser]); // Runs when appUser changes
-
     
     // Save parked cars to local storage whenever they change
-    // useEffect(() => {
-    //     sessionStorage.setItem(PARKED_CARS_KEY, JSON.stringify(parkedCars));
-    // }, [parkedCars]);
+    useEffect(() => {
+        sessionStorage.setItem(PARKED_CARS_KEY, JSON.stringify(parkedCars));
+    }, [parkedCars]);
 
     const toggleParkThisCar = (licencePlate) => {
         setParkedCars((prev) => {
@@ -53,6 +45,7 @@ export const ListAllCars = ({ appUser, cars }) => {
             } else {
                 // Sent to backend
                 console.log(`Unparking car ${licencePlate} for user ${appUser.id} (${appUser.userName})`);
+
             }
         }, 200); // Small delay to ensure state update is complete
     };
@@ -60,7 +53,10 @@ export const ListAllCars = ({ appUser, cars }) => {
     return (
         <div id="cars">
             {cars.map((car, index) => {
-                const isParked = parkedCars[car.licencePlate] || false; // Check parked state
+                // let isParked = parkedCars[car.licencePlate] || false; // Check parked state
+
+                let isParked = appUser?.isParked?.some(parked => parked.licencePlate === car.licencePlate) || false;
+
                 return (
                     <div key={index} className={styles.listedCar}>
                         <button
