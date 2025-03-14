@@ -1,10 +1,16 @@
-import {NavLink, Outlet} from 'react-router';
-import { useState } from 'react';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { ParkingP } from './ParkingP';
 import '../Navbar.css'; // Lägg till en CSS-fil för styling
 
-export const Navbar = ({appUser}) => {
+export const Navbar = ({ appUser }) => {
     const [menuOpen, setMenuOpen] = useState(false);
+    const location = useLocation();
+
+    // Stäng menyn vid sidbyte
+    useEffect(() => {
+        setMenuOpen(false);
+    }, [location.pathname]);
 
     return (
     <>
@@ -18,9 +24,9 @@ export const Navbar = ({appUser}) => {
                 <NavLink to="register" >Register</NavLink>
                 <NavLink to="login" >Login</NavLink>
                 
-                <NavLink to={`/user/${appUser ? appUser.userID: 0}`}>
-                    {appUser ? appUser.userName : 'Not logged in'}</NavLink>
-                
+                <NavLink to={`/user/${appUser ? appUser.userID : 0}`}>
+                    {appUser ? appUser.userName : 'Not logged in'}
+                </NavLink>
             </div>
         </nav>
         {/* Pages content goes here */}
@@ -29,5 +35,5 @@ export const Navbar = ({appUser}) => {
         {/* Big P parking sign - made into a Component*/}
         <ParkingP />
     </>
-    )
-}
+    );
+};
