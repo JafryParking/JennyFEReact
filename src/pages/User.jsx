@@ -29,12 +29,12 @@ export const User = ({appUser, setAppUser}) => {
         let fee = new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(user.parkingFeesOwed);
         return (
             <>
-                <h1>({user.id}) {user.userName}</h1>
+                <h1 id={user.id}>{user.userName}</h1>
                 <div>
                     <p>Parking Fees: {fee} kr</p>
                 </div>
                 {<ListParkingHistory userHistory={user.parkingHistory} />}
-                {<ListAllCars appUser={appUser} cars={user.cars} />}
+                {<ListAllCars appUser={appUser} setAppUser={setAppUser} cars={user.cars} />}
         </>
         )
       }
