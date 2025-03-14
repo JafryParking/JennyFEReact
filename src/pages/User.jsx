@@ -4,18 +4,18 @@ import axios from 'axios';
 import { backendURL } from '../../config';
 import '../App.css';
 import styles from './user.module.css';
+import { ListAllCars } from '../components/ListAllCars.jsx';
 
 export const User = ({appUser, setAppUser}) => {
     let { id } = useParams();
-    
-    const [allUsers, setAllUsers] = useState(null);
-        
+            
     // Update URL when id changes
     useEffect(() => {
         if (id) {
             axios.get(`${backendURL}/user/${id}`)
                 .then(response => {
-                    setAllUsers(response.data);
+                    
+                    setAppUser(response.data);
                 })
                 .catch(error => {
                     console.error("Error fetching data:", error);
@@ -23,25 +23,8 @@ export const User = ({appUser, setAppUser}) => {
         }
     }, [id]);
     
-    const ListAllCars = ({cars}) => {
-        if (!cars || cars.length < 1) {
-            return (
-                <div>Add cars - print form here</div>
-            );
-        } else
-        return (
-            <div id="cars">
-            {cars.map((car, index) => { 
-                return (
-                    <div key={index} className={styles.car}>{car.licencePlate}</div>
-                )
-            })}
-           </div>
-        )
-     }
-
     const DisplayUserDetails = ({user}) => {
-        setAppUser(user);
+        
         let fee = new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(user.parkingFeesOwed);
         return (
             <>
@@ -56,7 +39,7 @@ export const User = ({appUser, setAppUser}) => {
 
     return (
         <div className={styles.userPage}>
-            {id && allUsers ? <DisplayUserDetails user={allUsers} /> : 'No such user'}
+            {id && appUser ? <DisplayUserDetails user={appUser} /> : 'No such user'}
         </div>
     )
 }
