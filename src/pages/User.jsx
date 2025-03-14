@@ -9,7 +9,7 @@ import { ListParkingHistory } from '../components/ListParkingHistory.jsx';
 
 export const User = ({appUser, setAppUser}) => {
     let { id } = useParams();
-            
+    
     // Update URL when id changes
     useEffect(() => {
         if (id) {
@@ -34,7 +34,7 @@ export const User = ({appUser, setAppUser}) => {
                     <p>Parking Fees: {fee} kr</p>
                 </div>
                 {<ListParkingHistory userHistory={user.parkingHistory} />}
-                {<ListAllCars cars={user.cars} />}
+                {<ListAllCars appUser={appUser} cars={user.cars} />}
         </>
         )
       }

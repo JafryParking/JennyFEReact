@@ -8,7 +8,7 @@ export const StartParking = ({appUser}) => {
         <>
         <h1>Start Parking</h1>
         {appUser.userName}'s cars:
-        <ListAllCars cars={appUser.cars}/>
+        <ListAllCars appUser={appUser} cars={appUser.cars}/>
         </>
     )}
      else {return <h1>Start Parking-No user</h1>}
