@@ -6,39 +6,7 @@ div.userPage {
     display:flex;
     flex-direction: column;
 }
-div.carNotParked {
-    background-image: url('../assets/car.svg');
-    background-repeat: no-repeat;
-    background-position: left center;
-    background-size: 40px;
-    min-height: 20px;
-    padding: 0.5em 0.5em 0.5em 2em;
-    margin-bottom: 0.3em;
-    font-size: 2em;
-    font-variant: small-caps;
-    letter-spacing: 0.3em;
-    text-align: center;
-    border: 1px solid gray;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    border: 2px solid green;
-  }
-  .carParked {
-    background-image: url('../assets/car.svg');
-    background-repeat: no-repeat;
-    background-position: left center;
-    background-size: 40px;
-    min-height: 20px;
-    padding: 0.5em 0.5em 0.5em 2em;
-    margin-bottom: 0.3em;
-    font-size: 2em;
-    font-variant: small-caps;
-    letter-spacing: 0.3em;
-    text-align: center;
-    border: 1px solid gray;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    border: 2px solid red;
-  }
-  
+
   .parkingHistory {
     
   }
@@ -54,11 +22,50 @@ div.carNotParked {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 40px;
+    width: 60px;
     background-color: unset;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  .listedCar>button.parked {
     
+  }
+  .listedCar>button.notParked {
+    filter: unset;
   }
   .listedCar>div {
     width: 100%;
     margin: 0 auto 0 0.3em;
   }
+  div.carNotParked {
+    background-image: url('../assets/car.svg');
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 40px;
+    min-height: 20px;
+    padding: 0.5em 0.5em 0.5em 2em;
+    margin-bottom: 0.3em;
+    font-size: 2em;
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    text-align: center;
+    border: 1px solid gray;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    
+  }
+  div.carParked {
+    background-image: url('../assets/car.svg');
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 40px;
+    min-height: 20px;
+    padding: 0.5em 0.5em 0.5em 2em;
+    margin-bottom: 0.3em;
+    font-size: 2em;
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+    text-align: center;
+    border: 1px solid gray;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    border: 2px solid green;
+  }
+  

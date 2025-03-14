@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import styles from "../pages/user.module.css";
+import axios from "axios";
+import { backendURL } from '../../config';
 
 export const ListAllCars = ({ appUser, cars }) => {
     
@@ -10,7 +12,13 @@ export const ListAllCars = ({ appUser, cars }) => {
             console.log(`Parking car ${licencePlate} for user ${appUser.id} (${appUser.userName})`);
         } else {
             // Sent to backend
-            console.log(`Unparking car ${licencePlate} for user ${appUser.id} (${appUser.userName})`);
+            axios.get(`${backendURL}/stopParking/${licencePlate}`)
+                .then(response => {
+                    alert(response.data);
+                })
+                .catch(error => {
+                    console.error("Error fetching data:", error);
+                });
         }
     }
 
@@ -21,9 +29,10 @@ export const ListAllCars = ({ appUser, cars }) => {
                 return (
                     <div key={index} className={styles.listedCar}>
                         <button
+                            className={isParked ? styles.parked : styles.notParked}
                             onClick={() => toggleParkThisCar(car.licencePlate)}
                         >
-                            {isParked ? "Unpark this car" : "Park this car"}
+                            {isParked ? "U" : "P"}
                         </button>
                         <div className={isParked ? styles.carParked : styles.carNotParked}>
                             {car.licencePlate}
