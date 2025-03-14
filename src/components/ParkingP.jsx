@@ -1,15 +1,24 @@
 import styles from './parkingp.module.css';
 import { useNavigate } from 'react-router';
 
-export const ParkingP = () => {
+export const ParkingP = ({appUser}) => {
     const navigate = useNavigate();
 
     function doStuff(){
         navigate("start-parking");
     }
+    const PrintP=({appUser}) => {
+        if (appUser) {
+            console.log(appUser.cars);
+            return ('P')
+
+            }
+            
+            
+    }
     return (
         <div className={styles.bigP} onClick={doStuff}>
-            P
-            </div>
+            <PrintP appUser={appUser} />
+        </div>
     )
 }

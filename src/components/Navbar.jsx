@@ -33,7 +33,7 @@ export const Navbar = ({ appUser }) => {
         <Outlet />
 
         {/* Big P parking sign - made into a Component*/}
-        <ParkingP />
+        <ParkingP appUser={appUser}/>
     </>
     );
 };

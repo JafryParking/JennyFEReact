@@ -1,13 +1,14 @@
 import {useState, useEffect} from 'react';
+import { useNavigate } from 'react-router';
 
 export const Login = ({appUser,setAppUser}) => {
-
+    const navigate = useNavigate();
     const refAction =  (id, name, car) => {
         let newUser = { userID: id, userName: name, cars: [{ licencePlate: car }] };
 
-            setAppUser(newUser );
+            setAppUser(newUser);
             sessionStorage.setItem("persistedUser", JSON.stringify(newUser));
-            
+            navigate(`../user/${newUser.userID}`);
         }
         useEffect(() => {
             // console.log("Updated AppUser:", appUser);

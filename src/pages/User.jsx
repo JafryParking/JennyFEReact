@@ -5,7 +5,7 @@ import { backendURL } from '../../config';
 import '../App.css';
 import styles from './user.module.css';
 
-export const User = () => {
+export const User = ({appUser, setAppUser}) => {
     let { id } = useParams();
     
     const [allUsers, setAllUsers] = useState(null);
@@ -41,6 +41,7 @@ export const User = () => {
      }
 
     const DisplayUserDetails = ({user}) => {
+        setAppUser(user);
         let fee = new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(user.parkingFeesOwed);
         return (
             <>
