@@ -7,6 +7,7 @@ export const Register = () => {
 
     const [newUser, setNewUser] = useState(null);
 
+    // Send new user to backend, when newUser is set.
     useEffect(() => {
         if (newUser !== null) {
             axios.post(`${backendURL}/addUser`, newUser)
@@ -22,7 +23,7 @@ export const Register = () => {
     function registerUser() {
         let hardcodedUser = {username: "Karl", password: "password", email: 'karl@yahoo.se', licensePlate: 'nnn999'}
         console.log(hardcodedUser);
-                // Kommenterar bort så det inte reggas nya användare hela tiden medan jag testar.
+        // Kommenterar bort så det inte reggas nya användare hela tiden medan jag testar.
         // setNewUser(hardcodedUser);
     }
 
