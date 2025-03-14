@@ -5,6 +5,7 @@ import { backendURL } from '../../config';
 import '../App.css';
 import styles from './user.module.css';
 import { ListAllCars } from '../components/ListAllCars.jsx';
+import { ListParkingHistory } from '../components/ListParkingHistory.jsx';
 
 export const User = ({appUser, setAppUser}) => {
     let { id } = useParams();
@@ -32,6 +33,7 @@ export const User = ({appUser, setAppUser}) => {
                 <div>
                     <p>Parking Fees: {fee} kr</p>
                 </div>
+                {<ListParkingHistory userHistory={user.parkingHistory} />}
                 {<ListAllCars cars={user.cars} />}
         </>
         )
