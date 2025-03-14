@@ -9,8 +9,13 @@ export const ParkingP = ({appUser}) => {
     }
     const PrintP=({appUser}) => {
         if (appUser) {
-            return ('P')
-            }
+            return (<p>P</p>)
+        }
+        else {
+            return (
+                <p className={styles.notActive}>P</p>
+            )
+        }
     }
     return (
         <div className={styles.bigP} onClick={InitiateStartParking}>

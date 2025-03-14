@@ -1,6 +1,11 @@
-.bigP {
-    color: #009F0B;
+.bigP >*{
+    color: #009e0b;
     font-size: 150px;
     font-weight: 700;
     text-align: center;
+    text-shadow: 3px 3px #e0e0e0;
+}
+.notActive {
+    color: white;
+    text-shadow: 3px 3px #e0e0e0;
 }

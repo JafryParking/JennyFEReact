@@ -1,23 +1,11 @@
 #root {
   max-width: 500px;
   margin: 0 auto;
-   
+   padding-top: 130px;
 }
 * {
   font-size: 14px;
 }
 h1 {
   font-size: 20px;
-}
-.left {
-  display: flex;
-  flex-direction: column;
-}
-.right {
- margin-left: 2em;
-}
-#sitebox {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
 }
