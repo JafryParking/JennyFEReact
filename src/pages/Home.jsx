@@ -64,10 +64,6 @@ export const Home = () => {
           Add user
         </button>
       </div>
-
-      {/* Bakgrundsbokstaven */}
-      {/* Finns nu i NavBar som en component ParkingP istället */}
-      {/* <div className="background-text">P</div> */}
     </div>
   );
 };
