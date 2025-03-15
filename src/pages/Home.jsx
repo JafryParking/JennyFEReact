@@ -1,69 +1,22 @@
-import React, { useState } from "react";
+import React, {useEffect} from "react";
+import { Link, useNavigate } from "react-router";
 
-export const Home = () => {
-  const [user, setUser] = useState("");
-  const [vehicle, setVehicle] = useState("");
-  const [parkingSlots, setParkingSlots] = useState(Array(6).fill(""));
+export const Home = ({appUser}) => {
+  const navigate = useNavigate();
 
-  const handleSlotChange = (index, value) => {
-    const newSlots = [...parkingSlots];
-    newSlots[index] = value;
-    setParkingSlots(newSlots);
-  };
+  useEffect(() => {
+    if (appUser) {
+      navigate("start-parking");
+    }
+  }, [appUser, navigate]); // Run only when appUser changes
 
-  const handleSubmit = () => {
-    alert(`User: ${user}, Vehicle: ${vehicle}, Slots: ${parkingSlots.join("")}`);
-  };
-
-  return (
-    <div className="home-container">
-     
-
-      {/* Spacer to push content below navbar */}
-      <div className="home-content">
-                
-        <div className="input-group">
-          <span className="text-xl">👤</span>
-          <input
-            type="text"
-            placeholder="Enter name"
-            value={user}
-            onChange={(e) => setUser(e.target.value)}
-            className="input-field"
-          />
-        </div>
-        
-        <div className="input-group">
-          <input
-            type="text"
-            placeholder="Enter vehicle details"
-            value={vehicle}
-            onChange={(e) => setVehicle(e.target.value)}
-            className="input-field"
-          />
-        </div>
-        
-        <div className="parking-slots">
-          <span className="text-xl">🚗</span>
-          {parkingSlots.map((slot, index) => (
-            <input
-              key={index}
-              type="text"
-              maxLength="1"
-              value={slot}
-              onChange={(e) => handleSlotChange(index, e.target.value)}
-              className="slot-input"
-            />
-          ))}
-        </div>
-        
-        <button
-          onClick={handleSubmit}
-          className="add-user-btn"
-        >
-          Add user
-        </button>
+  if (!appUser) {
+    return (
+      <div className="home-container">
+        <Link to="register"> Register </Link> or <Link to="login">Login</Link>
       </div>
-    </div>
-  );
+    );
+  }
+
+  return null; // Prevents rendering anything before navigation happens
 };
