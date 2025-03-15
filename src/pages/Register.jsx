@@ -15,6 +15,7 @@ export const Register = () => {
                 .then(response => {
                     if (response.status === 200) {
                         console.log("Success:", response.data); // Handle successful response
+                        alert('Congratulations you just registered as a new user.');
                     }
                 })
                 .catch(error => {
