@@ -25,24 +25,23 @@ export const User = () => {
         }
     }, [id]);
     
-    const DisplayUserDetails = ({user}) => {
-        
-        let fee = new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(user.parkingFeesOwed);
+    const DisplayUserDetails = () => {
+        let fee = new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(appUser.parkingFeesOwed);
         return (
             <>
-                <h1 id={user.id}>{user.userName}</h1>
+                <h1 id={appUser.id}>{appUser.userName}</h1>
                 <div>
                     <p>Parking Fees: {fee} kr</p>
                 </div>
-                {<ListParkingHistory userHistory={user.parkingHistory} />}
-                {<ListAllCars appUser={appUser} setAppUser={setAppUser} cars={user.cars} />}
-        </>
+                {<ListParkingHistory userHistory={appUser.parkingHistory} />}
+                {<ListAllCars appUser={appUser} setAppUser={setAppUser} cars={appUser.cars} />}
+            </>
         )
       }
 
     return (
         <div className={styles.userPage}>
-            {id && appUser && appUser.id!=0 ? <DisplayUserDetails user={appUser} /> : 'No such user'}
+            {id && appUser && appUser.id!=0 ? <DisplayUserDetails /> : 'No such user'}
         </div>
     )
 }
