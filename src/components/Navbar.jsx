@@ -6,10 +6,16 @@ import { UserContext } from '../contexts/UserContext';
 
 export const Navbar = () => {
     const [appUser, setAppUser] = useState(null);
-
     const [menuOpen, setMenuOpen] = useState(false);
     const location = useLocation();
     
+    useEffect(() => {
+        let savedUser = sessionStorage.getItem("persistedUser");
+        if (savedUser) {
+            setAppUser(savedUser ? JSON.parse(savedUser) : null);
+        }
+    }, []); // Runs only on mount
+
     const LoginOrUserPage = () =>{
         if (appUser){
             return (
@@ -35,8 +41,10 @@ export const Navbar = () => {
 
     const LogMeOut = () =>{
         setAppUser(null);
+        sessionStorage.setItem("persistedUser", JSON.stringify(null));
     }
-    
+
+
     return (
     <UserContext.Provider value={{appUser, setAppUser}}>
         <nav className="navbar">
