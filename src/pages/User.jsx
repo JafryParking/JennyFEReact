@@ -18,6 +18,7 @@ export const User = () => {
             axios.get(`${backendURL}/user/${id}`)
                 .then(response => {
                     setAppUser(response.data);
+                    sessionStorage.setItem("persistedUser", JSON.stringify(response.data));
                 })
                 .catch(error => {
                     console.error("Error fetching data:", error);
