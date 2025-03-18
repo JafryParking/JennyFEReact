@@ -32,13 +32,6 @@ export const Register = () => {
         }
     }, [newUser]);
 
-    // function registerUser() {
-    //     let hardcodedUser = {username: "Karl", password: "password", email: 'karl@yahoo.se', licensePlate: 'nnn999'}
-    //     console.log(hardcodedUser);
-    //     // Kommenterar bort så det inte reggas nya användare hela tiden medan jag testar.
-    //     setNewUser(hardcodedUser);
-    // }
-
     return (
         <div id="registerPage">
             <h1>Register</h1>
