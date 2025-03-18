@@ -13,14 +13,18 @@ export const Navbar = () => {
     const LoginOrUserPage = () =>{
         if (appUser){
             return (
+                <>
                 <NavLink to={`user/${appUser.id}`}>{appUser.userName}</NavLink>)
+                <button onClick={LogMeOut}>Log out</button>
+                </>
+                )
             }
         else {
             return (
                 <>
-            <NavLink to="register" >Register</NavLink>
-            <NavLink to="login" >Login</NavLink>
-            </>
+                <NavLink to="register" >Register</NavLink>
+                <NavLink to="login" >Login</NavLink>
+                </>
             );
         }
     };
@@ -29,6 +33,9 @@ export const Navbar = () => {
         setMenuOpen(false);
     }, [location.pathname]);
 
+    const LogMeOut = () =>{
+        setAppUser(null);
+    }
     
     return (
     <UserContext.Provider value={{appUser, setAppUser}}>
