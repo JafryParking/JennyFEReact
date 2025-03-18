@@ -23,7 +23,6 @@ export const ListAllCars = ({ appUser, setAppUser, cars }) => {
               .catch(error => {
                 console.error("Error fetching data:", error);
             });
-            console.log(`Parking car ${licencePlate} for user ${appUser.id} (${appUser.userName})`);
         } else {
             // Sent to backend
             axios.get(`${backendURL}/stopParking/${licencePlate}`)

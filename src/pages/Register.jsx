@@ -1,10 +1,12 @@
 import {useState, useEffect} from 'react';
+import { useNavigate } from 'react-router';
 import axios from 'axios';
 import { backendURL } from '../../config';
 import {NewUserForm} from '../components/NewUserForm.jsx';
 
 
 export const Register = () => {
+    const navigate = useNavigate();
 
     const [newUser, setNewUser] = useState(null);
 
@@ -14,8 +16,7 @@ export const Register = () => {
             axios.post(`${backendURL}/addUser`, newUser)
                 .then(response => {
                     if (response.status === 200) {
-                        console.log("Success:", response.data); // Handle successful response
-                        alert('Congratulations you just registered as a new user.');
+                        response.data && navigate(`../user/${response.data.userID}`);
                     }
                 })
                 .catch(error => {
