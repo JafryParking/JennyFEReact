@@ -1,7 +1,10 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useContext} from "react";
 import { Link, useNavigate } from "react-router";
+import { UserContext } from "../contexts/UserContext";
 
-export const Home = ({appUser}) => {
+export const Home = () => {
+  const appUser = useContext(UserContext);
+  
   const navigate = useNavigate();
 
   useEffect(() => {

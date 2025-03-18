@@ -1,4 +1,4 @@
-export const StopParking =  ({appUser}) => {
+export const StopParking =  () => {
     return (
         <h1>Stop Parking</h1>
     )

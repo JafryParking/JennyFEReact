@@ -1,13 +1,15 @@
 import { useParams } from 'react-router';
-import { useState, useEffect, useDebugValue } from 'react'
+import { useState, useEffect, useDebugValue, useContext } from 'react'
 import axios from 'axios';
 import { backendURL } from '../../config';
 import '../App.css';
 import styles from './user.module.css';
 import { ListAllCars } from '../components/ListAllCars.jsx';
 import { ListParkingHistory } from '../components/ListParkingHistory.jsx';
+import { UserContext } from '../contexts/UserContext.jsx';
 
-export const User = ({appUser, setAppUser}) => {
+export const User = () => {
+    const {appUser, setAppUser} = useContext(UserContext);
     let { id } = useParams();
     
     // Update URL when id changes
@@ -15,7 +17,6 @@ export const User = ({appUser, setAppUser}) => {
         if (id) {
             axios.get(`${backendURL}/user/${id}`)
                 .then(response => {
-                    
                     setAppUser(response.data);
                 })
                 .catch(error => {
@@ -41,7 +42,7 @@ export const User = ({appUser, setAppUser}) => {
 
     return (
         <div className={styles.userPage}>
-            {id && appUser ? <DisplayUserDetails user={appUser} /> : 'No such user'}
+            {id && appUser && appUser.id!=0 ? <DisplayUserDetails user={appUser} /> : 'No such user'}
         </div>
     )
 }

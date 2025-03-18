@@ -1,18 +1,17 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import { useNavigate } from 'react-router';
+import { UserContext } from '../contexts/UserContext';
 
-export const Login = ({appUser,setAppUser}) => {
+export const Login = () => {
+    const {appUser, setAppUser} = useContext(UserContext);
+    
     const navigate = useNavigate();
     const refAction =  (id, name, car) => {
         let newUser = { Id: id, userName: name, cars: [{ licencePlate: car }] };
-
             setAppUser(newUser);
             sessionStorage.setItem("persistedUser", JSON.stringify(newUser));
             navigate(`../user/${newUser.Id}`);
         }
-        useEffect(() => {
-            // console.log("Updated AppUser:", appUser);
-        }, [appUser]);
 
     return (
         <div>

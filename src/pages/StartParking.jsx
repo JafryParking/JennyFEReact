@@ -1,6 +1,10 @@
 import styles from './user.module.css';
 import { ListAllCars } from '../components/ListAllCars.jsx';
-export const StartParking = ({appUser, setAppUser}) => {
+import { useContext } from 'react';
+import { UserContext } from '../contexts/UserContext.jsx';
+
+export const StartParking = () => {
+const  {appUser, setAppUser} = useContext(UserContext);
 
     if (appUser) {
     return (

@@ -10,17 +10,16 @@ import {Navbar} from "./components/Navbar.jsx";
 
 const App = () => {
   // needed for Login
-  const [appUser, setAppUser] = useState(null);
+  
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Navbar appUser={appUser}/>}>
-          <Route path="/" element={<Home appUser={appUser}/>} />
-          <Route path="/login" element={<Login appUser={appUser} setAppUser={setAppUser} />} />
+        <Route element={<Navbar />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/start-parking" element={<StartParking appUser={appUser} setAppUser={setAppUser}/>} />
-          <Route path="/stop-parking" element={<StopParking  appUser={appUser}/>} />
-          <Route path="/user/:id" element={<User appUser={appUser} setAppUser={setAppUser}/>} />
+          <Route path="/start-parking" element={<StartParking />} />
+          <Route path="/user/:id" element={<User />} />
         </Route>
       </Routes>
     </BrowserRouter>

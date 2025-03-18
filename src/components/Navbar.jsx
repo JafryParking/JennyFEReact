@@ -2,9 +2,11 @@ import { NavLink, Outlet, useLocation } from 'react-router';
 import { useState, useEffect } from 'react';
 import { ParkingP } from './ParkingP';
 import '../Navbar.css'; // Lägg till en CSS-fil för styling
+import { UserContext } from '../contexts/UserContext';
 
-export const Navbar = ({ appUser }) => {
-    
+export const Navbar = () => {
+    const [appUser, setAppUser] = useState(null);
+
     const [menuOpen, setMenuOpen] = useState(false);
     const location = useLocation();
     
@@ -29,7 +31,7 @@ export const Navbar = ({ appUser }) => {
 
     
     return (
-    <>
+    <UserContext.Provider value={{appUser, setAppUser}}>
         <nav className="navbar">
             <div className="logo">Jafry Parking</div>
             <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
@@ -47,6 +49,6 @@ export const Navbar = ({ appUser }) => {
 
         {/* Big P parking sign - made into a Component*/}
         <ParkingP appUser={appUser}/>
-    </>
+    </UserContext.Provider>
     );
 };
