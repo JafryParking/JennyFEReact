@@ -7,7 +7,7 @@ export const ParkingP = ({appUser}) => {
     function InitiateStartParking(){
         navigate("start-parking");
     }
-    const PrintP=({appUser}) => {
+    const PrintP=() => {
         if (appUser) {
             return (<p>P</p>)
         }
@@ -19,7 +19,7 @@ export const ParkingP = ({appUser}) => {
     }
     return (
         <div className={styles.bigP} onClick={InitiateStartParking}>
-            <PrintP appUser={appUser} />
+            <PrintP  />
         </div>
     )
 }
