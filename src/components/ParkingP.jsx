@@ -23,3 +23,5 @@ export const ParkingP = ({appUser}) => {
         </div>
     )
 }
+
+export default ParkingP;

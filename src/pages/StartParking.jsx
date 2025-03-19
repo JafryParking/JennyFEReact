@@ -1,18 +1,44 @@
-import styles from './user.module.css';
-import { ListAllCars } from '../components/ListAllCars.jsx';
-import { useContext } from 'react';
-import { UserContext } from '../contexts/UserContext.jsx';
+import React, { useState, useEffect } from "react";
+import "../pages/user.module.css";
+import { FaParking, FaStopCircle } from "react-icons/fa";
 
-export const StartParking = () => {
-const  {appUser, setAppUser} = useContext(UserContext);
+const StartParking = () => {
+  const [isParked, setIsParked] = useState(false);
+  const [timeElapsed, setTimeElapsed] = useState(0);
 
-    if (appUser) {
-    return (
-        <>
-        <h1>Start Parking</h1>
-        {appUser.userName}'s cars:
-        <ListAllCars appUser={appUser} setAppUser={setAppUser} cars={appUser.cars}/>
-        </>
-    )}
-     else {return <h1>Start Parking-No user</h1>}
-}
+  useEffect(() => {
+    let timer;
+    if (isParked) {
+      timer = setInterval(() => {
+        setTimeElapsed((prev) => prev + 1);
+      }, 1000);
+    } else {
+      setTimeElapsed(0);
+    }
+    return () => clearInterval(timer);
+  }, [isParked]);
+
+  const handleToggleParking = () => {
+    setIsParked(!isParked);
+  };
+
+  return (
+    <div className="parking-container">
+      <h2>{isParked ? "🅿️ Parkerad" : "🚗 Ej parkerad"}</h2>
+      <button className={isParked ? "stopParkingBtn" : "startParkingBtn"} onClick={handleToggleParking}>
+        {isParked ? <FaStopCircle size={24} /> : <FaParking size={24} />}
+        {isParked ? " Avsluta parkering" : " Starta parkering"}
+      </button>
+      {isParked && (
+        <div>
+          <p>Parkeringstid: {timeElapsed} sekunder</p>
+          <div className="parkingProgress">
+            <div style={{ width: `${(timeElapsed / 600) * 100}%` }}></div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default StartParking;

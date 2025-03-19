@@ -1,5 +1,5 @@
 import { useParams } from 'react-router';
-import { useState, useEffect, useDebugValue, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { backendURL } from '../../config';
 import '../App.css';
@@ -8,8 +8,8 @@ import { ListAllCars } from '../components/ListAllCars.jsx';
 import { ListParkingHistory } from '../components/ListParkingHistory.jsx';
 import { UserContext } from '../contexts/UserContext.jsx';
 
-export const User = () => {
-    const {appUser, setAppUser} = useContext(UserContext);
+const User = () => {
+    const { appUser, setAppUser } = useContext(UserContext);
     let { id } = useParams();
     
     // Update URL when id changes
@@ -38,11 +38,13 @@ export const User = () => {
                 {<ListAllCars appUser={appUser} setAppUser={setAppUser} cars={appUser.cars} />}
             </>
         )
-      }
+    }
 
     return (
         <div className={styles.userPage}>
-            {id && appUser && appUser.id!=0 ? <DisplayUserDetails /> : <h1>No such user</h1>}
+            {id && appUser && appUser.id != 0 ? <DisplayUserDetails /> : <h1>No such user</h1>}
         </div>
     )
 }
+
+export default User;

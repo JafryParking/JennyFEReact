@@ -1,9 +1,8 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
 import { backendURL } from '../../config';
-import {NewUserForm} from '../components/NewUserForm.jsx';
-
+import { NewUserForm } from '../components/NewUserForm.jsx';
 
 export const Register = () => {
     const navigate = useNavigate();
@@ -39,3 +38,5 @@ export const Register = () => {
         </div>
     )
 }
+
+export default Register;  // Lägg till exporten här

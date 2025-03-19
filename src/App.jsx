@@ -1,16 +1,14 @@
-import React, {useState}from "react";
-import { BrowserRouter, Routes, Route } from "react-router";
-import {Home} from "./pages/Home.jsx";
-import {Login} from "./pages/Login.jsx";
-import {Register} from "./pages/Register.jsx";
-import {StartParking} from "./pages/StartParking.jsx";
-import {StopParking} from "./pages/StopParking.jsx";
-import {User} from "./pages/User.jsx";
-import {Navbar} from "./components/Navbar.jsx";
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";  // Update the path to not include ".jsx"
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import StartParking from "./pages/StartParking";
+import StopParking from "./pages/StopParking";
+import User from "./pages/User";
+import Navbar from "./components/Navbar.jsx";
 
 const App = () => {
-  // needed for Login
-  
   return (
     <BrowserRouter>
       <Routes>

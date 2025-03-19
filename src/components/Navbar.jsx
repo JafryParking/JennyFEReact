@@ -4,7 +4,7 @@ import { ParkingP } from './ParkingP';
 import '../Navbar.css'; // Lägg till en CSS-fil för styling
 import { UserContext } from '../contexts/UserContext';
 
-export const Navbar = () => {
+const Navbar = () => {
     const [appUser, setAppUser] = useState(null);
     const [menuOpen, setMenuOpen] = useState(false);
     const location = useLocation();
@@ -67,3 +67,5 @@ export const Navbar = () => {
     </UserContext.Provider>
     );
 };
+
+export default Navbar;  // Här läggs till standardexporten
