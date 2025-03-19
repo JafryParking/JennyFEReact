@@ -2,6 +2,8 @@ import {useState, useEffect, useContext} from 'react';
 import { useNavigate } from 'react-router';
 import {useForm} from "react-hook-form";
 import { UserContext } from '../contexts/UserContext';
+import { backendURL } from '../../config';
+import axios from 'axios';
 
 export const Login = () => {
     const {appUser, setAppUser} = useContext(UserContext);
@@ -17,23 +19,20 @@ export const Login = () => {
     
         // Send new user to backend, when newUser is set.
         useEffect(() => {
+            
             if (newUser !== null) {
-                axios.post(`${backendURL}/login`, newUser)
+               newUser && axios.post(`${backendURL}/user/login`, newUser, {
+                    headers: {
+                        "Content-Type": "application/json", 
+                    },
+                })
                     .then(response => {
                         if (response.status === 200) {
-                            // response.data && navigate(`../user/${response.data.userID}`);
-                            response.data && console.log(response.data);
+                            response.data && navigate(`../user/${response.data}`);
                         }
                     })
                     .catch(error => {
-                        if (error.response) {
-                            // The server responded with a status outside 2xx
-                            if (error.response.status === 400) {
-                                alert(error.response.data);
-                            } else {
-                                console.error(`Unexpected Error (${error.response.status}):`, error.response.data);
-                            }
-                        }
+                        alert( error.response ? error.response.data : error.message);
                     });
             }
         }, [newUser]);
@@ -42,6 +41,7 @@ export const Login = () => {
         const refAction =  (id, name, car) => {
             let newUser = { Id: id, userName: name, cars: [{ licencePlate: car }] };
                 setAppUser(newUser);
+                console.log(newUser);
                 sessionStorage.setItem("persistedUser", JSON.stringify(newUser));
                 navigate(`../user/${newUser.Id}`);
             }
@@ -52,9 +52,8 @@ export const Login = () => {
             <h1>Login</h1>
 
             <form onSubmit={handleSubmit(onSubmit)}>
-                <input placeholder='Username' type="text" {...register("userName")} />
-                <input placeholder='password'type="password" {...register("password")}/>
-                <input placeholder='Email' type="email" {...register("email")}/>
+                <input placeholder='Username' type="text" {...register("UserName")} />
+                <input placeholder='password'type="password" {...register("Password")}/>
                 <input type="submit" value="Login"/>
             </form>
 
