@@ -42,7 +42,7 @@ export const User = () => {
 
     return (
         <div className={styles.userPage}>
-            {id && appUser && appUser.id!=0 ? <DisplayUserDetails /> : 'No such user'}
+            {id && appUser && appUser.id!=0 ? <DisplayUserDetails /> : <h1>No such user</h1>}
         </div>
     )
 }
