@@ -27,7 +27,7 @@ const Login = () => {
             })
                 .then(response => {
                     if (response.status === 200) {
-                        response.data && navigate(`../user/${response.data}`);
+                        response.data && navigate(`../user/${response.data.userID}`);
                     }
                 })
                 .catch(error => {
