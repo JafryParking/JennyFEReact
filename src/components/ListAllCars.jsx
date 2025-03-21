@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import styles from "../pages/user.module.css";
 import liststyles from "./listallCars.module.css";
 import axios from "axios";
+import { FaParking, FaStopCircle} from "react-icons/fa";
 import { backendURL } from '../../config';
 
 export const ListAllCars = ({ appUser, setAppUser, cars }) => {
@@ -64,7 +65,7 @@ export const ListAllCars = ({ appUser, setAppUser, cars }) => {
                             className={isParked ? styles.parked : styles.notParked}
                             onClick={() => toggleParkThisCar(car.licencePlate)}
                         >
-                            {isParked ? "U" : "P"}
+                            {isParked ? <FaStopCircle size={24} /> : <FaParking size={24} />}
                         </button>
                         <div className={isParked ? styles.carParked : styles.carNotParked}>
                             {car.licencePlate}
