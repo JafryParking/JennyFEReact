@@ -8,12 +8,13 @@ const Home = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (appUser) {
+    if (appUser && appUser.id !== undefined) {
       navigate("start-parking");
     }
-  }, [appUser, navigate]); // Körs bara när appUser ändras
+  }, [appUser]); // Körs bara när appUser ändras
 
-  if (!appUser) {
+  appUser && console.log(appUser);
+  if (appUser || appUser.id === 0) {
     return (
       <div className="home-container">
         <Link to="register">Register</Link> or <Link to="login">Login</Link>
