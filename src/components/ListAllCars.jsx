@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../pages/user.module.css";
 import liststyles from "./listallCars.module.css";
+import { useForm } from "react-hook-form";
 import axios from "axios";
 import { FaParking, FaStopCircle} from "react-icons/fa";
 import { backendURL } from '../../config';
@@ -11,15 +12,19 @@ export const ListAllCars = ({ appUser, setAppUser, cars }) => {
         setUserCars(cars);
     }, []); // Runs only on mount
     
+    const { register, reset, handleSubmit } = useForm();
 
-    function addCar(formData) {
-        const fulldata = Object.fromEntries(formData);
-        axios.post(`${backendURL}/addCar`, fulldata)
+    const addCar = (data) => {
+        
+        axios.post(`${backendURL}/addCar`, data)
             .then(response => {
                 setUserCars(response.data);
+                reset();        
             })
             .catch(error => {
+                console.log(error.response.data);
                 alert(error.response.data);
+                reset();
             });
     }
 
@@ -75,11 +80,10 @@ export const ListAllCars = ({ appUser, setAppUser, cars }) => {
             })}
             {/* Also print form to add new car */}
 
-            <form className={liststyles.addCar} action={addCar}>
+            <form className={liststyles.addCar} onSubmit={handleSubmit(addCar)}>
                 <label htmlFor="licensePlate">Add car:</label>
-                <input placeholder='AAA###' type="text" id="licensePlate" name="licensePlate" />
-                <input type="hidden" value={appUser.id} name="userID" />
-                <input type="hidden" value={appUser.userName}  name="userName"/>
+                <input type="text" placeholder="abc123" {...register("LicensePlate")}  />
+                <input type="hidden" value={appUser.id}  {...register("UserID")} />
                 <input type="submit" value="Save" />
             </form>
 
