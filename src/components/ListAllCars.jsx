@@ -1,10 +1,27 @@
 import { useState, useEffect } from "react";
 import styles from "../pages/user.module.css";
+import liststyles from "./listallCars.module.css";
 import axios from "axios";
 import { backendURL } from '../../config';
 
 export const ListAllCars = ({ appUser, setAppUser, cars }) => {
+    const [userCars, setUserCars] = useState([]);
+    useEffect(() => {
+        setUserCars(cars);
+    }, []); // Runs only on mount
     
+
+    function addCar(formData) {
+        const fulldata = Object.fromEntries(formData);
+        axios.post(`${backendURL}/addCar`, fulldata)
+            .then(response => {
+                setUserCars(response.data);
+            })
+            .catch(error => {
+                alert(error.response.data);
+            });
+    }
+
     const toggleParkThisCar = (licencePlate) => {
         let isParkedNow = appUser?.isParked?.some(parked => parked.licencePlate === licencePlate) || false;  
         if (!isParkedNow) {
@@ -39,7 +56,7 @@ export const ListAllCars = ({ appUser, setAppUser, cars }) => {
 
     return (
         <div id="cars">
-            {cars.map((car, index) => {
+            {userCars.map((car, index) => {
                 let isParked = appUser?.isParked?.some(parked => parked.licencePlate === car.licencePlate) || false;
                 return (
                     <div key={index} className={styles.listedCar}>
@@ -55,6 +72,16 @@ export const ListAllCars = ({ appUser, setAppUser, cars }) => {
                     </div>
                 );
             })}
+            {/* Also print form to add new car */}
+
+            <form className={liststyles.addCar} action={addCar}>
+                <label htmlFor="licensePlate">Add car:</label>
+                <input placeholder='AAA###' type="text" id="licensePlate" name="licensePlate" />
+                <input type="hidden" value={appUser.id} name="userID" />
+                <input type="hidden" value={appUser.userName}  name="userName"/>
+                <input type="submit" value="Save" />
+            </form>
+
         </div>
     );
 

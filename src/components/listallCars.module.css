@@ -1,0 +1,10 @@
+form.addCar {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+    margin-top: 2em;
+}
+form.addCar >input {
+    
+}
