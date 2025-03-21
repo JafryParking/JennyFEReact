@@ -9,11 +9,11 @@ const Home = () => {
 
   useEffect(() => {
     if (appUser && appUser.id !== undefined) {
-      navigate("start-parking");
+      navigate("user/" + appUser.id);
     }
   }, [appUser]); // Körs bara när appUser ändras
 
-  appUser && console.log(appUser);
+  // appUser && console.log(appUser);
   if (appUser || appUser.id === 0) {
     return (
       <div className="home-container">

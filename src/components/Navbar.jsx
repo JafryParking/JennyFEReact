@@ -62,8 +62,7 @@ const Navbar = () => {
         {/* Pages content goes here */}
         <Outlet />
 
-        {/* Big P parking sign - made into a Component*/}
-        <ParkingP appUser={appUser}/>
+
     </UserContext.Provider>
     );
 };
