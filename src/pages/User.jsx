@@ -8,6 +8,34 @@ import { ListAllCars } from '../components/ListAllCars.jsx';
 import { ListParkingHistory } from '../components/ListParkingHistory.jsx';
 import { UserContext } from '../contexts/UserContext.jsx';
 
+const ParkingTimer = ({ isParkingActive, ratePerMinute }) => {
+    const [elapsedTime, setElapsedTime] = useState(0); // time in seconds
+
+    useEffect(() => {
+        let interval = null;
+        if (isParkingActive) {
+            interval = setInterval(() => {
+                setElapsedTime(prev => prev + 1);
+            }, 1000);
+        } else {
+            clearInterval(interval);
+        }
+        return () => clearInterval(interval);
+    }, [isParkingActive]);
+
+    const minutes = Math.floor(elapsedTime / 60);
+    const seconds = elapsedTime % 60;
+    const cost = ((elapsedTime / 60) * ratePerMinute).toFixed(2);
+
+    return (
+        <div className={styles.timerContainer}>
+            <div className={styles.timerProgress} style={{ width: `${Math.min((elapsedTime / 3600) * 100, 100)}%` }}></div>
+            <p>Parkeringstid: {minutes} min {seconds} sek</p>
+            <p>Kostnad: {cost} kr</p>
+        </div>
+    );
+};
+
 const User = () => {
     const { appUser, setAppUser } = useContext(UserContext);
     let { id } = useParams();
@@ -36,12 +64,18 @@ const User = () => {
     }, [id]);
 
     const DisplayUserDetails = () => {
-        let fee = new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(appUser.parkingFeesOwed);
         return (
             <>
                 <h1 id={appUser.id}>{appUser.userName}</h1>
+                {/* Display parking timer if a car is currently parked */}
+                {appUser?.isParked && appUser.isParked.length > 0 && (
+                    <ParkingTimer 
+                        isParkingActive={true} 
+                        ratePerMinute={1} 
+                    />
+                )}
                 <div>
-                    <p>Parking Fees: {fee} kr</p>
+                    <p>Parking Fees: {new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(appUser.parkingFeesOwed)} kr</p>
                 </div>
                 {isLoading && <p className={styles.loadingMessage}>⏳ Loading...</p>}
                 {<ListParkingHistory userHistory={appUser.parkingHistory} />}
