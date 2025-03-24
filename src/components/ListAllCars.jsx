@@ -14,12 +14,18 @@ export const ListAllCars = ({ appUser, setAppUser, cars }) => {
     
     const { register, reset, handleSubmit, formState:{errors} } = useForm();
 
-    const addCar = (data) => {
-        
-        axios.post(`${backendURL}/addCar`, data)
+    const addCar = (input) => {
+        console.log(input);
+        axios({method: 'post',
+            url : `${backendURL}/addCar`, 
+            data: input
+            })
             .then(response => {
+                if (response.status === 200 && response.data) {
                 setUserCars(response.data);
+                console.log(response.data);
                 reset();        
+                }
             })
             .catch(error => {
                 console.log(error.response.data);
@@ -29,16 +35,16 @@ export const ListAllCars = ({ appUser, setAppUser, cars }) => {
     }
 
 
-    const toggleParkThisCar = (licencePlate) => {
-        let isParkedNow = appUser?.isParked?.some(parked => parked.licencePlate === licencePlate) || false;  
+    const toggleParkThisCar = (regPlate) => {
+        let isParkedNow = appUser?.isParked?.some(parked => parked.regPlate === regPlate) || false;  
         if (!isParkedNow) {
-            // Sent to backend
+            // Not parked > Sent to backend to start Parking
             axios({
                 method: 'post',
                 url: `${backendURL}/startParking`,
                 data: {
                   userID: appUser.id,
-                  licensePlate: licencePlate
+                  regPlate: regPlate
                 }
               })
               .then(response => {
@@ -48,8 +54,8 @@ export const ListAllCars = ({ appUser, setAppUser, cars }) => {
                 console.error("Error fetching data:", error);
             });
         } else {
-            // Sent to backend
-            axios.get(`${backendURL}/stopParking/${licencePlate}`)
+            // Car is parked -> Sent to backend to stop parking
+            axios.get(`${backendURL}/stopParking/${regPlate}`)
                 .then(response => {
                     let fee = new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(response.data.fee);
                     alert(`${fee} kr added to your account.`);
@@ -64,17 +70,17 @@ export const ListAllCars = ({ appUser, setAppUser, cars }) => {
     return (
         <div id="cars">
             {userCars.map((car, index) => {
-                let isParked = appUser?.isParked?.some(parked => parked.licencePlate === car.licencePlate) || false;
+                let isParked = appUser?.isParked?.some(parked => parked.regPlate === car.regPlate) || false;
                 return (
                     <div key={index} className={styles.listedCar}>
                         <button
                             className={isParked ? styles.parked : styles.notParked}
-                            onClick={() => toggleParkThisCar(car.licencePlate)}
+                            onClick={() => toggleParkThisCar(car.regPlate)}
                         >
-                            {isParked ? <FaStopCircle size={24} /> : <FaParking size={24} />}
+                            {isParked ? <FaStopCircle size={40} /> : <FaParking size={40} />}
                         </button>
                         <div className={isParked ? styles.carParked : styles.carNotParked}>
-                            {car.licencePlate}
+                            {car.regPlate}
                         </div>
                     </div>
                 );
@@ -82,11 +88,11 @@ export const ListAllCars = ({ appUser, setAppUser, cars }) => {
             {/* Also print form to add new car */}
 
             <form className={liststyles.addCar} onSubmit={handleSubmit(addCar)}>
-                <label htmlFor="LicensePlate">Add car:</label>
-                <input type="text" placeholder="abc123" name="LicensePlate" {...register("LicensePlate", {required:true, minLength:6})}  />
+                <label htmlFor="regPlate">Add car:</label>
+                <input type="text" placeholder="abc123" name="regPlate" {...register("regPlate", {required:true, minLength:6})}  />
                 <input type="hidden" value={appUser.id} name="UserID" {...register("UserID")} />
                 <button type="submit">Save</button>
-                {errors.LicensePlate && <p>Cars need at least 6 symbols</p>}
+                {errors.regPlate && <p>Cars need at least 6 symbols</p>}
             </form>
 
         </div>

@@ -9,16 +9,16 @@ import { ListParkingHistory } from '../components/ListParkingHistory.jsx';
 import { useAtom } from 'jotai';
 import { userAtom } from '../atoms/userAtom.jsx';
 
-const ParkingTimer = ({ isParkingActive, licencePlate }) => {
+const ParkingTimer = ({ isParkingActive, regPlate }) => {
     const [elapsedTime, setElapsedTime] = useState(0); // Time in seconds
     const [cost, setCost] = useState(0); // Dynamisk kostnad
 
     useEffect(() => {
         let interval = null;
-        if (isParkingActive && licencePlate) {
+        if (isParkingActive && regPlate) {
             interval = setInterval(() => {
                 setElapsedTime(prev => prev + 1);
-                axios.get(`${backendURL}/currentlyParked/${licencePlate}`)
+                axios.get(`${backendURL}/currentlyParked/${regPlate}`)
                     .then(response => {
                         setCost(response.data);
                     })
@@ -30,7 +30,7 @@ const ParkingTimer = ({ isParkingActive, licencePlate }) => {
             clearInterval(interval);
         }
         return () => clearInterval(interval);
-    }, [isParkingActive, licencePlate]);
+    }, [isParkingActive, regPlate]);
 
     const minutes = Math.floor(elapsedTime / 60);
     const seconds = elapsedTime % 60;
@@ -80,7 +80,7 @@ const User = () => {
                 {appUser?.isParked && appUser.isParked.length > 0 && (
                     <ParkingTimer 
                         isParkingActive={true} 
-                        licencePlate={appUser.isParked[0].licencePlate} 
+                        regPlate={appUser.isParked[0].regPlate} 
                     />
                 )}
                 <div>
