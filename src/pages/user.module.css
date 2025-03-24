@@ -115,23 +115,6 @@ form > input:focus {
   border-color: #4CAF50;
 }
 
-/* Timer styles */
-.timerContainer {
-  width: 100%;
-  background-color: #e0e0e0; /* Light grey background for the entire bar */
-  border-radius: 8px;
-  margin-top: 10px;
-  height: 20px; /* Height of the progress bar */
-  position: relative;
-}
-
-.timerProgress {
-  height: 100%;
-  border-radius: 8px;
-  background-color: #4caf50; /* Green color for the progressive bar */
-  transition: width 1s ease-in-out;
-}
-
 /* Media Queries för responsiv design */
 @media (max-width: 768px) {
   div.userPage {

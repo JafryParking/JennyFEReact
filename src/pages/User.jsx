@@ -9,9 +9,8 @@ import { ListParkingHistory } from '../components/ListParkingHistory.jsx';
 import { useAtom } from 'jotai';
 import { userAtom } from '../atoms/userAtom.jsx';
 
-
 const ParkingTimer = ({ isParkingActive, ratePerMinute }) => {
-    const [elapsedTime, setElapsedTime] = useState(0); // time in seconds
+    const [elapsedTime, setElapsedTime] = useState(0); // Time in seconds
 
     useEffect(() => {
         let interval = null;
@@ -31,9 +30,8 @@ const ParkingTimer = ({ isParkingActive, ratePerMinute }) => {
 
     return (
         <div className={styles.timerContainer}>
-            <div className={styles.timerProgress} style={{ width: `${Math.min((elapsedTime / 3600) * 100, 100)}%` }}></div>
-            <p>Parkeringstid: {minutes} min {seconds} sek</p>
-            <p>Kostnad: {cost} kr</p>
+            <p>Parking time: {minutes} min {seconds} sec</p>
+            <p>Cost: {cost} kr</p>
         </div>
     );
 };
