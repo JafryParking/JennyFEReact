@@ -15,7 +15,7 @@ export const ListAllCars = ({ appUser, setAppUser, cars }) => {
     const { register, reset, handleSubmit, formState:{errors} } = useForm();
 
     const addCar = (input) => {
-        console.log(input);
+        
         axios({method: 'post',
             url : `${backendURL}/addCar`, 
             data: input
@@ -23,7 +23,6 @@ export const ListAllCars = ({ appUser, setAppUser, cars }) => {
             .then(response => {
                 if (response.status === 200 && response.data) {
                 setUserCars(response.data);
-                console.log(response.data);
                 reset();        
                 }
             })
