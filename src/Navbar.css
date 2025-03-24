@@ -1,10 +1,4 @@
 :root {
-    --primary-color: #007BFF;
-    --secondary-color: #00D4FF;
-    --background-color: #333;
-    --text-color: white;
-    --hover-background: rgba(255, 255, 255, 0.2);
-    --box-shadow-color: rgba(0, 0, 0, 0.15);
 
     --navbar-padding: 8px 16px;
     --navbar-font-size: 1.2em;
@@ -18,7 +12,7 @@
     --link-margin: 0 5px;
     --link-border-radius: 8px;
     --animation-duration: 0.4s;
-    --animation-ease: ease-out;
+    --animation-ease: ease-out; 
 }
 
 .navbar {
