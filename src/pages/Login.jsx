@@ -42,9 +42,7 @@ const Login = () => {
     // Login for the static 3 buttons
     const refAction = (id, name, car) => {
         let newUser = { Id: id, userName: name, cars: [{ licencePlate: car }] };
-        setAppUser(newUser);
-        console.log(newUser);
-        sessionStorage.setItem("persistedUser", JSON.stringify(newUser));
+        // setAppUser(newUser);
         navigate(`../user/${newUser.Id}`);
     }
 
