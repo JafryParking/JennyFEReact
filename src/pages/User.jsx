@@ -67,13 +67,15 @@ const User = () => {
                 .finally(() => {
                     setIsLoading(false);
                 });
+        } else {
+            setAppUser(null);
         }
     }, [id]);
 
     const DisplayUserDetails = () => {
         return (
             <>
-                <h1 id={appUser.id}>{appUser.userName}</h1>
+                <h1 id={`user-${appUser.id}`}>{appUser.userName}</h1>
                 {/* Display parking timer if a car is currently parked */}
                 {appUser?.isParked && appUser.isParked.length > 0 && (
                     <ParkingTimer 

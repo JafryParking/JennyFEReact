@@ -12,7 +12,7 @@ export const ListAllCars = ({ appUser, setAppUser, cars }) => {
         setUserCars(cars);
     }, []); // Runs only on mount
     
-    const { register, reset, handleSubmit } = useForm();
+    const { register, reset, handleSubmit, formState:{errors} } = useForm();
 
     const addCar = (data) => {
         
@@ -82,10 +82,11 @@ export const ListAllCars = ({ appUser, setAppUser, cars }) => {
             {/* Also print form to add new car */}
 
             <form className={liststyles.addCar} onSubmit={handleSubmit(addCar)}>
-                <label htmlFor="licensePlate">Add car:</label>
-                <input type="text" placeholder="abc123" {...register("LicensePlate")}  />
-                <input type="hidden" value={appUser.id}  {...register("UserID")} />
+                <label htmlFor="LicensePlate">Add car:</label>
+                <input type="text" placeholder="abc123" name="LicensePlate" {...register("LicensePlate", {required:true, minLength:6})}  />
+                <input type="hidden" value={appUser.id} name="UserID" {...register("UserID")} />
                 <button type="submit">Save</button>
+                {errors.LicensePlate && <p>Cars need at least 6 symbols</p>}
             </form>
 
         </div>
