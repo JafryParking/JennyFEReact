@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router';
+import { useParams } from 'react-router';
 import { useState, useEffect} from 'react';
 import axios from 'axios';
 import { backendURL } from '../../config';
@@ -17,11 +17,7 @@ const User = () => {
     const [ appUser, setAppUser ]  = useAtom(userAtom);
     let { id } = useParams();
     const [isLoading, setIsLoading] = useState(false);
-    const navigate = useNavigate();
-    const showPopup = (message) => {
-        alert(message);
-    };
-
+    
     // Update URL when id changes
     useEffect(() => {
         if (id && appUser) {
@@ -33,6 +29,7 @@ const User = () => {
                 })
                 .catch(error => {
                     console.error("Error fetching user data:", error);
+                    setAppUser(null);
                 })
                 .finally(() => {
                     setIsLoading(false);
@@ -43,8 +40,8 @@ const User = () => {
     }, [id]);
 
     const DisplayUserDetails = () => {
-        const [showHistory, setShowHistory] = useState(false);
-        const [showCars, setShowCars] = useState(true);
+        const [showHistory, setShowHistory] = useState(true);
+        const [showCars, setShowCars] = useState(false);
         function toggleHistory(){
             setShowHistory(!showHistory);
         }

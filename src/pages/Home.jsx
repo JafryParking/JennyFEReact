@@ -6,8 +6,7 @@ import { userAtom } from "../atoms/userAtom";
 
 const Home = () => {
   const [appUser, setAppUser] = useAtom(userAtom);
-  const [redirect, setRedirect] = useState(false);
-  
+   
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,6 +19,7 @@ const Home = () => {
   if (!appUser || appUser.id === 0 || appUser.id == undefined) {
     return (
       <div className="home-container">
+        {/* Pretty logo here */}
         <Link to="register">Register</Link> or <Link to="login">Login</Link>
       </div>
     );
