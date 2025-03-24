@@ -9,29 +9,36 @@ import { ListParkingHistory } from '../components/ListParkingHistory.jsx';
 import { useAtom } from 'jotai';
 import { userAtom } from '../atoms/userAtom.jsx';
 
-const ParkingTimer = ({ isParkingActive, ratePerMinute }) => {
+const ParkingTimer = ({ isParkingActive, licencePlate }) => {
     const [elapsedTime, setElapsedTime] = useState(0); // Time in seconds
+    const [cost, setCost] = useState(0); // Dynamisk kostnad
 
     useEffect(() => {
         let interval = null;
-        if (isParkingActive) {
+        if (isParkingActive && licencePlate) {
             interval = setInterval(() => {
                 setElapsedTime(prev => prev + 1);
+                axios.get(`${backendURL}/currentlyParked/${licencePlate}`)
+                    .then(response => {
+                        setCost(response.data);
+                    })
+                    .catch(error => {
+                        console.error("Error fetching parking cost:", error);
+                    });
             }, 1000);
         } else {
             clearInterval(interval);
         }
         return () => clearInterval(interval);
-    }, [isParkingActive]);
+    }, [isParkingActive, licencePlate]);
 
     const minutes = Math.floor(elapsedTime / 60);
     const seconds = elapsedTime % 60;
-    const cost = ((elapsedTime / 60) * ratePerMinute).toFixed(2);
 
     return (
         <div className={styles.timerContainer}>
             <p>Parking time: {minutes} min {seconds} sec</p>
-            <p>Cost: {cost} kr</p>
+            <p>Cost: {new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(cost)} kr</p>
         </div>
     );
 };
@@ -71,7 +78,7 @@ const User = () => {
                 {appUser?.isParked && appUser.isParked.length > 0 && (
                     <ParkingTimer 
                         isParkingActive={true} 
-                        ratePerMinute={1} 
+                        licencePlate={appUser.isParked[0].licencePlate} 
                     />
                 )}
                 <div>
