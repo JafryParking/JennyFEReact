@@ -4,10 +4,12 @@ import liststyles from "./listallCars.module.css";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { FaParking, FaStopCircle} from "react-icons/fa";
+import { MdLocalParking } from "react-icons/md";
 import { backendURL } from '../../config';
 
 export const ListAllCars = ({ appUser, setAppUser, cars }) => {
     const [userCars, setUserCars] = useState([]);
+    
     useEffect(() => {
         setUserCars(cars);
     }, []); // Runs only on mount
@@ -76,7 +78,7 @@ export const ListAllCars = ({ appUser, setAppUser, cars }) => {
                             className={isParked ? styles.parked : styles.notParked}
                             onClick={() => toggleParkThisCar(car.regPlate)}
                         >
-                            {isParked ? <FaStopCircle size={40} /> : <FaParking size={40} />}
+                            {isParked ? <FaStopCircle size={40} /> : <MdLocalParking  size={40} />}
                         </button>
                         <div className={isParked ? styles.carParked : styles.carNotParked}>
                             {car.regPlate}

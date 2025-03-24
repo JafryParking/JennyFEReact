@@ -3,7 +3,7 @@ div.userPage {
   max-width: 500px;
   width: 95vw;
   padding: 1rem;
-  background-color: #e0e0e0;
+  background-color: #f0f0f0;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -15,7 +15,13 @@ div.userPage {
 .parkingHistory {
   margin-bottom: 1rem;
 }
-
+button.active {
+color: #646cff;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+button.active:hover {
+  color: white;
+}
 /* Stilar för listade bilar */
 .listedCar {
   display: flex;
@@ -23,9 +29,10 @@ div.userPage {
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
-  background-color: #fff;
+  /* background-color: #fff; */
   border-radius: 8px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 0.3em;
 }
 
 .listedCar > button:hover {
@@ -33,7 +40,8 @@ div.userPage {
 }
 
 .listedCar > button.parked {
-  filter: unset;
+  /* filter: unset; */
+  background-color:#4CAF50;
 }
 
 .listedCar > button.notParked {
@@ -54,7 +62,6 @@ div.carNotParked {
   background-size: 40px; 
   padding: 0.5em 0.5em 0.5em 2em;
   margin-left: 40px;
-  
   font-size: 1.5em;
   font-variant: small-caps;
   letter-spacing: 0.2em;
@@ -70,8 +77,9 @@ div.carParked {
   background-position: left center;
   background-size: 40px;
   padding: 0.5em 0.5em 0.5em 2em;
-  
-  font-size: 1.5em;
+  margin-left: 20px;
+  margin-right:auto;
+  font-size: 1.6em;
   font-variant: small-caps;
   letter-spacing: 0.2em;
   text-align: left;
@@ -98,6 +106,16 @@ form > input {
 form > input:focus {
   outline: none;
   border-color: #4CAF50;
+}
+
+.toggleButtonDiv{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  .toggleButtonDiv>button {
+    font-size: 5rem;
+  }
 }
 
 /* Media Queries för responsiv design */

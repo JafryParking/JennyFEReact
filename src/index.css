@@ -5,7 +5,7 @@
 
   color-scheme: light;
   color: #213547;
-  background-color: #fde2e4; /* Ljusrosa bakgrund */
+  background-color: #ebecf7; /* Ljusrosa bakgrund */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -33,7 +33,7 @@ body {
   justify-content: center;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #fde2e4 !important; /* Ljusrosa bakgrund */
+  background-color: #ebecf7 !important; /* Ljusrosa bakgrund */
   transition: background-color 0.3s ease; /* Smooth background transition */
 }
 
@@ -51,7 +51,7 @@ button {
   font-size: 1.1em; /* Slightly larger font size for better readability */
   font-weight: 500;
   font-family: inherit;
-  background-color: #b0b0b0;
+  
   color: white;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease; /* Added transition for hover effects */
@@ -60,6 +60,7 @@ button {
 button:hover {
   background-color: #646cff;
   transform: scale(1.05); /* Slight scale effect on hover */
+  color: white;
 }
 button:focus,
 button:focus-visible {
@@ -90,7 +91,7 @@ button:active {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #fde2e4;
+    background-color: #ebecf7;
   }
 
   a:hover {
@@ -98,6 +99,7 @@ button:active {
   }
 
   button {
-    background-color: #b0b0b0;
+    background-color: #c2c4c9;
+    color: black;
   }
 }

@@ -3,6 +3,8 @@ import { useState, useEffect} from 'react';
 import axios from 'axios';
 import { backendURL } from '../../config';
 import '../App.css';
+import { BsArchive } from "react-icons/bs";
+import { MdDirectionsCar } from "react-icons/md";
 import styles from './user.module.css';
 import { ListAllCars } from '../components/ListAllCars.jsx';
 import { ListParkingHistory } from '../components/ListParkingHistory.jsx';
@@ -12,6 +14,7 @@ import { userAtom } from '../atoms/userAtom.jsx';
 const ParkingTimer = ({ isParkingActive, regPlate }) => {
     const [elapsedTime, setElapsedTime] = useState(0); // Time in seconds
     const [cost, setCost] = useState(0); // Dynamisk kostnad
+
 
     useEffect(() => {
         let interval = null;
@@ -73,9 +76,23 @@ const User = () => {
     }, [id]);
 
     const DisplayUserDetails = () => {
+        const [showHistory, setShowHistory] = useState(false);
+        const [showCars, setShowCars] = useState(true);
+        function toggleHistory(){
+            setShowHistory(!showHistory);
+        }
+        function toggleCarList(){
+            setShowCars(!showCars);
+        }
         return (
             <>
                 <h1 id={`user-${appUser.id}`}>{appUser.userName}</h1>
+
+                <div className={styles.toggleButtonDiv}>
+                    <button className={showHistory ? styles.active:""} onClick={toggleHistory}><BsArchive size={40} /></button>
+                    <button className={showCars ? styles.active:""} onClick={toggleCarList}><MdDirectionsCar size={40} /></button>
+                </div>
+
                 {/* Display parking timer if a car is currently parked */}
                 {appUser?.isParked && appUser.isParked.length > 0 && (
                     <ParkingTimer 
@@ -87,8 +104,9 @@ const User = () => {
                     <p>Parking Fees: {new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(appUser.parkingFeesOwed)} kr</p>
                 </div>
                 {isLoading && <p className={styles.loadingMessage}>⏳ Loading...</p>}
-                {!isLoading && <ListParkingHistory userHistory={appUser.parkingHistory} />}
-                {!isLoading && <ListAllCars appUser={appUser} setAppUser={setAppUser} cars={appUser.cars} />}
+                {!isLoading && showHistory && <ListParkingHistory userHistory={appUser.parkingHistory} />}
+                {!isLoading && showCars && <ListAllCars appUser={appUser} setAppUser={setAppUser} cars={appUser.cars} />}
+                {!showCars && !showHistory && <p>Choose to show either History or Cars on the buttons above</p>}
             </>
         )
     }
