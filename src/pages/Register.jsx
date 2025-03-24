@@ -3,19 +3,21 @@ import { useNavigate } from 'react-router';
 import axios from 'axios';
 import { backendURL } from '../../config';
 import { NewUserForm } from '../components/NewUserForm.jsx';
+import { useAtom } from 'jotai';
+import { userAtom } from '../atoms/userAtom.jsx';
 
 export const Register = () => {
     const navigate = useNavigate();
-
+    const [appUser, setAppUser] = useAtom(userAtom);
     const [newUser, setNewUser] = useState(null);
-
+    
     // Send new user to backend, when newUser is set.
     useEffect(() => {
         if (newUser !== null) {
             axios.post(`${backendURL}/addUser`, newUser)
                 .then(response => {
-                    if (response.status === 200) {
-                        response.data && navigate(`../user/${response.data.userID}`);
+                    if (response.status === 200 && response.data) {
+                        setAppUser(response.data);
                     }
                 })
                 .catch(error => {
@@ -30,6 +32,11 @@ export const Register = () => {
                 });
         }
     }, [newUser]);
+
+    useEffect (()=>{
+        if (appUser !== null && newUser !== null)
+            appUser && navigate(`../user/${appUser.userID}`);
+    },[appUser, newUser])
 
     return (
         <div id="registerPage">

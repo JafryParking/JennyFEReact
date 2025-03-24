@@ -12,7 +12,7 @@ const Login = () => {
 
     const navigate = useNavigate();
 
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, formState:{errors} } = useForm();
 
     const onSubmit = (data) => setNewUser(data);
 
@@ -39,27 +39,19 @@ const Login = () => {
         }
     }, [newUser]);
 
-    // Login for the static 3 buttons
-    const refAction = (id, name, car) => {
-        let newUser = { Id: id, userName: name, cars: [{ licencePlate: car }] };
-        // setAppUser(newUser);
-        navigate(`../user/${newUser.Id}`);
-    }
+
 
     return (
         <div>
             <h1>Login</h1>
 
             <form onSubmit={handleSubmit(onSubmit)}>
-                <input placeholder='Username' type="text" {...register("UserName")} />
+                <input placeholder='Username' type="text" {...register("UserName", {required:true})} />
                 <input placeholder='password' type="password" {...register("Password")} />
                 <input type="submit" value="Login" />
             </form>
 
-            <button onClick={() => refAction(1, "Jenny", "")}>Login user 1</button>
-            <button onClick={() => refAction(2, "Fredric", "")}>Login user 2</button>
-            <button onClick={() => refAction(3, "Jane", "")}>Login user 3</button>
-            {appUser != null && <p>{appUser.userName}</p>}
+    
 
         </div>
     )
