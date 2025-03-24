@@ -41,7 +41,7 @@ const User = () => {
 
     const DisplayUserDetails = () => {
         const [showHistory, setShowHistory] = useState(true);
-        const [showCars, setShowCars] = useState(false);
+        const [showCars, setShowCars] = useState(true);
         function toggleHistory(){
             setShowHistory(!showHistory);
         }

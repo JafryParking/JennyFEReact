@@ -11,6 +11,17 @@ div.userPage {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+.sortLabel{
+  margin-left: 40px;
+  font-size: 0.9em;
+  font-style: italic;
+}
+.sortSelect{
+  padding: 0.3em;
+  margin-left: 2em;
+  font-size: inherit;
+  font-style: inherit;
+}
 /* Historia för parkering (kan fyllas med mer stil senare) */
 .parkingHistory {
   margin-bottom: 1rem;
