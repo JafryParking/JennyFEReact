@@ -16,10 +16,10 @@ const Navbar = () => {
     }, []); // Runs only on mount
 
     const LoginOrUserPage = () =>{
-        if (appUser){
+        if (appUser&& appUser.id!=null){
             return (
                 <>
-                <NavLink to={`user/${appUser.id}`}>{appUser.userName}</NavLink>)
+                <NavLink to={`user/${appUser.id}`}>{appUser.userName}</NavLink>
                 <button onClick={LogMeOut}>Log out</button>
                 </>
                 )
