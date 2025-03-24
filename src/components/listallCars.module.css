@@ -5,3 +5,16 @@ form.addCar {
     align-items: center;
     margin-top: 2em;
 }
+ul {
+    list-style-type: none;
+}
+li:before { content:"\2714\0020"; } 
+li{
+    margin-bottom: 0.9em;
+}
+li>em {
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    font-style: normal;
+    font-size: 1.1em;
+}

@@ -23,7 +23,7 @@ export const ListParkingHistory = ({userHistory}) => {
         <ul className={styles.parkingHistory}>
             {userHistory.map((park, index) => { 
                 return (            
-                    <li key={index}>{park.parkedCar.regPlate} : {formatDateTime(park.startTime)} - {formatDateTime(park.endTime)}</li>
+                    <li key={index}><em>{park.parkedCar.regPlate} :</em> {formatDateTime(park.startTime)} - {formatDateTime(park.endTime)}</li>
                 )
             })}
         </ul>
