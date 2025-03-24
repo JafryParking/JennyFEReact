@@ -1,6 +1,7 @@
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router';
 import { useState, useEffect } from 'react';
 import '../Navbar.css'; // Lägg till en CSS-fil för styling
+import logo from '../assets/jafry_parking_logo.svg';
 
 import { useAtom } from 'jotai';
 import { userAtom } from '../atoms/userAtom';
@@ -46,7 +47,9 @@ const Navbar = () => {
     return (
     <>
         <nav className="navbar">
-            <div className="logo">Jafry Parking</div>
+            <div className="logo">
+                <img src={logo} alt="Jafry Parking Logo" style={{ height: '40px' }} />
+            </div>
             <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
                 ☰
             </button>

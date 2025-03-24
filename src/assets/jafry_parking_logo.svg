@@ -1,0 +1,17 @@
+
+<svg width="400" height="100" viewBox="0 0 400 100" xmlns="http://www.w3.org/2000/svg" fill="none">
+    <!-- Bakgrundsrektangel för färggrann effekt -->
+    <rect width="400" height="100" fill="url(#grad1)" rx="15" />
+    <defs>
+        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color: #007BFF; stop-opacity: 1" />
+            <stop offset="100%" style="stop-color: #00D4FF; stop-opacity: 1" />
+        </linearGradient>
+    </defs>
+
+    <!-- Text för "JAFRY" med kontrasterande färg -->
+    <text x="20" y="60" font-family="Arial, sans-serif" font-weight="bold" font-size="48" fill="#FFFFFF">JAFRY</text>
+
+    <!-- Text för "Parking" med något mindre storlek -->
+    <text x="200" y="60" font-family="Arial, sans-serif" font-weight="normal" font-size="36" fill="#FFFFFF">Parking</text>
+</svg>
