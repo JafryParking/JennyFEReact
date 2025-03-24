@@ -1,12 +1,14 @@
-import { useParams } from 'react-router';
-import { useState, useEffect, useContext } from 'react';
+import { useNavigate, useParams } from 'react-router';
+import { useState, useEffect} from 'react';
 import axios from 'axios';
 import { backendURL } from '../../config';
 import '../App.css';
 import styles from './user.module.css';
 import { ListAllCars } from '../components/ListAllCars.jsx';
 import { ListParkingHistory } from '../components/ListParkingHistory.jsx';
-import { UserContext } from '../contexts/UserContext.jsx';
+import { useAtom } from 'jotai';
+import { userAtom } from '../atoms/userAtom.jsx';
+
 
 const ParkingTimer = ({ isParkingActive, ratePerMinute }) => {
     const [elapsedTime, setElapsedTime] = useState(0); // time in seconds
@@ -37,17 +39,17 @@ const ParkingTimer = ({ isParkingActive, ratePerMinute }) => {
 };
 
 const User = () => {
-    const { appUser, setAppUser } = useContext(UserContext);
+    const [ appUser, setAppUser ]  = useAtom(userAtom);
     let { id } = useParams();
     const [isLoading, setIsLoading] = useState(false);
-    
+    const navigate = useNavigate();
     const showPopup = (message) => {
         alert(message);
     };
 
     // Update URL when id changes
     useEffect(() => {
-        if (id) {
+        if (id && appUser) {
             setIsLoading(true);
             axios.get(`${backendURL}/user/${id}`)
                 .then(response => {
@@ -78,15 +80,15 @@ const User = () => {
                     <p>Parking Fees: {new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(appUser.parkingFeesOwed)} kr</p>
                 </div>
                 {isLoading && <p className={styles.loadingMessage}>⏳ Loading...</p>}
-                {<ListParkingHistory userHistory={appUser.parkingHistory} />}
-                {<ListAllCars appUser={appUser} setAppUser={setAppUser} cars={appUser.cars} />}
+                {!isLoading && <ListParkingHistory userHistory={appUser.parkingHistory} />}
+                {!isLoading && <ListAllCars appUser={appUser} setAppUser={setAppUser} cars={appUser.cars} />}
             </>
         )
     }
 
     return (
         <div className={styles.userPage}>
-            {id && appUser && appUser.id !== 0 ? <DisplayUserDetails /> : <h1>No such user</h1>}
+            {(appUser && !isLoading) ? <DisplayUserDetails /> : <h1>Loading...</h1>}
         </div>
     )
 }

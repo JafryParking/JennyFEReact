@@ -1,12 +1,14 @@
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router';
 import { useForm } from "react-hook-form";
-import { UserContext } from '../contexts/UserContext';
+
 import { backendURL } from '../../config';
 import axios from 'axios';
+import { useAtom } from 'jotai';
+import { userAtom } from '../atoms/userAtom';
 
 const Login = () => {
-    const { appUser, setAppUser } = useContext(UserContext);
+    const [ appUser, setAppUser ]  = useAtom(userAtom);
 
     const navigate = useNavigate();
 
@@ -28,6 +30,7 @@ const Login = () => {
                 .then(response => {
                     if (response.status === 200) {
                         response.data && navigate(`../user/${response.data.userID}`);
+                        setAppUser(response.data);
                     }
                 })
                 .catch(error => {
