@@ -1,19 +1,15 @@
-import { NavLink, Outlet, useLocation } from 'react-router';
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router';
 import { useState, useEffect } from 'react';
 import '../Navbar.css'; // Lägg till en CSS-fil för styling
-import { UserContext } from '../contexts/UserContext';
+
+import { useAtom } from 'jotai';
+import { userAtom } from '../atoms/userAtom';
 
 const Navbar = () => {
-    const [appUser, setAppUser] = useState(null);
+    const [appUser, setAppUser] = useAtom(userAtom);
     const [menuOpen, setMenuOpen] = useState(false);
     const location = useLocation();
-    
-    useEffect(() => {
-        let savedUser = sessionStorage.getItem("persistedUser");
-        if (savedUser) {
-            setAppUser(savedUser ? JSON.parse(savedUser) : null);
-        }
-    }, []); // Runs only on mount
+    const navigate = useNavigate();
 
     const LoginOrUserPage = () =>{
         if (appUser&& appUser.id!=null){
@@ -40,12 +36,15 @@ const Navbar = () => {
 
     const LogMeOut = () =>{
         setAppUser(null);
-        sessionStorage.setItem("persistedUser", JSON.stringify(null));
     }
+    useEffect(()=>{
+        if (appUser == null)
+            navigate('/');
+    },[appUser])
 
 
     return (
-    <UserContext.Provider value={{appUser, setAppUser}}>
+    <>
         <nav className="navbar">
             <div className="logo">Jafry Parking</div>
             <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
@@ -60,9 +59,7 @@ const Navbar = () => {
         </nav>
         {/* Pages content goes here */}
         <Outlet />
-
-
-    </UserContext.Provider>
+        </>
     );
 };
 

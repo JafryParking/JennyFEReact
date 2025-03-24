@@ -1,9 +1,12 @@
-import React, { useEffect, useContext } from "react";
+import { useAtom } from "jotai";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";  // Korrigera import från 'react-router' till 'react-router-dom'
-import { UserContext } from "../contexts/UserContext";
+import { userAtom } from "../atoms/userAtom";
+
 
 const Home = () => {
-  const appUser = useContext(UserContext);
+  const [appUser, setAppUser] = useAtom(userAtom);
+  const [redirect, setRedirect] = useState(false);
   
   const navigate = useNavigate();
 
@@ -14,7 +17,7 @@ const Home = () => {
   }, [appUser]); // Körs bara när appUser ändras
 
   // appUser && console.log(appUser);
-  if (appUser || appUser.id === 0) {
+  if (!appUser || appUser.id === 0 || appUser.id == undefined) {
     return (
       <div className="home-container">
         <Link to="register">Register</Link> or <Link to="login">Login</Link>

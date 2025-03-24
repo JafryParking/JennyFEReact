@@ -28,6 +28,7 @@ export const ListAllCars = ({ appUser, setAppUser, cars }) => {
             });
     }
 
+
     const toggleParkThisCar = (licencePlate) => {
         let isParkedNow = appUser?.isParked?.some(parked => parked.licencePlate === licencePlate) || false;  
         if (!isParkedNow) {
@@ -84,7 +85,7 @@ export const ListAllCars = ({ appUser, setAppUser, cars }) => {
                 <label htmlFor="licensePlate">Add car:</label>
                 <input type="text" placeholder="abc123" {...register("LicensePlate")}  />
                 <input type="hidden" value={appUser.id}  {...register("UserID")} />
-                <input type="submit" value="Save" />
+                <button type="submit">Save</button>
             </form>
 
         </div>
