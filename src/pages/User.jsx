@@ -15,7 +15,6 @@ const ParkingTimer = ({ isParkingActive, regPlate }) => {
     const [elapsedTime, setElapsedTime] = useState(0); // Time in seconds
     const [cost, setCost] = useState(0); // Dynamisk kostnad
 
-
     useEffect(() => {
         let interval = null;
         if (isParkingActive && regPlate) {
@@ -101,7 +100,7 @@ const User = () => {
                     />
                 )}
                 <div>
-                    <p>Parking Fees: {new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(appUser.parkingFeesOwed)} kr</p>
+                    <p className={styles.parkingFee}>Parking Fees: {new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(appUser.parkingFeesOwed)} kr</p>
                 </div>
                 {isLoading && <p className={styles.loadingMessage}>⏳ Loading...</p>}
                 {!isLoading && showHistory && <ListParkingHistory userHistory={appUser.parkingHistory} />}

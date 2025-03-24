@@ -41,7 +41,8 @@ button.active:hover {
 
 .listedCar > button.parked {
   /* filter: unset; */
-  background-color:#4CAF50;
+  background-color:#747bff;;
+  color: white;
 }
 
 .listedCar > button.notParked {
@@ -83,8 +84,8 @@ div.carParked {
   font-variant: small-caps;
   letter-spacing: 0.2em;
   text-align: left;
-  background-color: #e5f8e5;
-  border: 2px solid green;
+  background-color: #dfe0ff;
+  border: 2px solid #747bff;;
   border-radius: 8px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -105,7 +106,7 @@ form > input {
 
 form > input:focus {
   outline: none;
-  border-color: #4CAF50;
+  border-color: #747bff;;
 }
 
 .toggleButtonDiv{
@@ -113,11 +114,12 @@ form > input:focus {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  .toggleButtonDiv>button {
-    font-size: 5rem;
-  }
 }
 
+p.parkingFee{
+  font-size: 1.3rem;
+  
+}
 /* Media Queries för responsiv design */
 @media (max-width: 768px) {
   div.userPage {
