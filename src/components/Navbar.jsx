@@ -15,7 +15,7 @@ const Navbar = () => {
         if (appUser&& appUser.id!=null){
             return (
                 <>
-                <NavLink to={`user/${appUser.id}`}>{appUser.userName}</NavLink>
+                <NavLink to={`user/${appUser.id}`}>My page</NavLink>
                 <button onClick={LogMeOut}>Log out</button>
                 </>
                 )
