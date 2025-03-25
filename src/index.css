@@ -39,7 +39,7 @@ body {
   align-items: center;
   justify-content: center;
   min-width: 320px;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   background-color: #ebecf7 !important; /* Ljusrosa bakgrund */
   transition: background-color 0.3s ease; /* Smooth background transition */
 }
@@ -65,7 +65,7 @@ button {
 }
 
 button:hover {
-  background-color: #646cff;
+  /* background-color: #646cff; */
   transform: scale(1.05); /* Slight scale effect on hover */
   color: white;
 }

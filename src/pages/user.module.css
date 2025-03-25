@@ -1,7 +1,7 @@
 /* Grundläggande stilar för användarsidan */
 div.userPage {
+  box-sizing:  border-box;
   max-width: 500px;
-  width: 95vw;
   padding: 1rem;
   background-color: #fbfbfb;
   display: flex;
@@ -143,7 +143,7 @@ p.parkingFee{
 /* Media Queries för responsiv design */
 @media (max-width: 768px) {
   div.userPage {
-    width: 90vw;
+    width: 95vw;
   }
 
  
