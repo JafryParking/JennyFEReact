@@ -34,7 +34,9 @@
     padding: 4px;
     text-align: center;
 }
-
+button.menu-toggle {
+    padding-right: 2em;
+}
 .logo {
     font-size: var(--logo-font-size);
     font-weight: bold;
