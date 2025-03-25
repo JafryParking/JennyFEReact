@@ -37,7 +37,7 @@ return (
                     <label htmlFor="regPlate">Add car:</label>
                     <input type="text" placeholder="abc123" name="regPlate" {...register("regPlate", {required:true, minLength:6})}  />
                     <input type="hidden" value={userID} name="UserID" {...register("UserID")} />
-                    <button type="submit">Save</button>
+                    <input type="submit" value="Save" />
                     {errors.regPlate && <p>Cars need at least 6 symbols</p>}
                 </form>
 )
