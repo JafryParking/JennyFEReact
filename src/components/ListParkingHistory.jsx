@@ -62,7 +62,6 @@ export const ListParkingHistory = ({userHistory}) => {
                 <option value="date">Date Parked</option>
                 <option value="dateRev">Date Parked (oldest first)</option>
                 <option value="regPlate">Reg Plate</option>
-                
             </select>
             </label>
         <ul className={styles.parkingHistory}>

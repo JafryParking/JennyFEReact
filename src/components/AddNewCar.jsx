@@ -5,31 +5,31 @@ import { backendURL } from "../../config";
 import { useAtom } from "jotai";
 import { userAtom } from "../atoms/userAtom";
 
-export const AddNewCar = ({userID, setShowCars}) => {
+// -----------------------------------------------------------------------------
+//     Usage: <AddNewCar userID={} />
+//
+//  Component to print form for adding a new car, and sending it to the backend. 
+//  Updates appUser state to autmatically re-render the page
+// 
+//   To fix: error displaying wierd?
+// -----------------------------------------------------------------------------
+export const AddNewCar = ({userID}) => {
     const [appUser, setAppUser] = useAtom(userAtom);
     const { register, reset, handleSubmit, formState:{errors} } = useForm();
 
     const addCar = (input) => {
-        
-        axios({method: 'post',
-            url : `${backendURL}/addCar`, 
-            data: input
-            })
+        axios.post( `${backendURL}/addCar`, input )
             .then(response => {
                 if (response.status === 200 && response.data) {
                     setAppUser(prev => ({
                         ...prev,
                         cars: response.data
                     }));
-                setShowCars(true);
-                reset();        
                 }
             })
             .catch(error => {
-                console.log(error.response.data);
                 alert(error.response.data);
-                reset();
-            });
+            }).finally(()=> reset());
     }
 
 return (
