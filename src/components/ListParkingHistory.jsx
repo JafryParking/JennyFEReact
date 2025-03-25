@@ -1,5 +1,6 @@
 import styles from '../pages/user.module.css';
 import { useEffect, useState } from 'react';
+import { MdPayment } from "react-icons/md";
 
 function formatDateTime(dateString) {
     let date = new Date(dateString);
@@ -58,7 +59,7 @@ export const ListParkingHistory = ({userHistory}) => {
         <ul className={styles.parkingHistory}>
             {history.map((park, index) => { 
                 return (            
-                    <li key={index}><em>{park.parkedCar.regPlate} :</em> {formatDateTime(park.startTime)} - {formatDateTime(park.endTime)} ({new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(park.parkingFee)} kr)</li>
+                    <li key={index}><em>{park.parkedCar.regPlate} <MdPayment size="14"/> {new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(park.parkingFee)} kr</em>: {formatDateTime(park.startTime)} - {formatDateTime(park.endTime)}  </li>
                 )
             })}
         </ul>
