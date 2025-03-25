@@ -1,6 +1,6 @@
 import styles from '../pages/user.module.css';
 import { useEffect, useState } from 'react';
-import { MdPayment } from "react-icons/md";
+import { MdDirectionsCar , MdPayment , MdKeyboardDoubleArrowRight  } from "react-icons/md";
 import { formatDateTime, formatDoubleToKr } from '../formatHelpers/formatHelperFunctions';
 
 // -----------------------------------------------------------------------------
@@ -59,7 +59,20 @@ export const ListParkingHistory = ({userHistory}) => {
         <ul className={styles.parkingHistory}>
             {history.map((park) => { 
                 return (            
-                    <li key={park.startTime}><em>{park.parkedCar.regPlate} <MdPayment size="14"/> {formatDoubleToKr(park.parkingFee)} kr</em>: {formatDateTime(park.startTime)} - {formatDateTime(park.endTime)}  </li>
+                    // <li key={park.startTime}>
+                    //     <em>{park.parkedCar.regPlate} </em>
+                    //     <em><MdPayment size="14"/> {formatDoubleToKr(park.parkingFee)} kr</em> : 
+                    //     {formatDateTime(park.startTime)} - {formatDateTime(park.endTime)}  
+                    // </li>
+                    <li key={park.startTime} className={styles.parkingGrid}>
+                        <span className={styles.regPlate}> 
+                            <MdDirectionsCar size="14"/> {park.parkedCar.regPlate}</span>
+                        <span className={styles.parkingFee}>
+                            <MdPayment size="14" /> {formatDoubleToKr(park.parkingFee)} kr
+                        </span>
+                            <span className={styles.parkingTime}>{formatDateTime(park.startTime)}
+                            <MdKeyboardDoubleArrowRight  size="14" /> {formatDateTime(park.endTime)} </span>
+                    </li>
                 )
             })}
         </ul>
