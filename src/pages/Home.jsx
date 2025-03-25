@@ -22,9 +22,11 @@ const Home = () => {
       <div className="home-container">
         {/* Pretty logo here */}
 
+        <Link to="login"><h1>Login</h1></Link>
+        
         <Link to="register"><h2>Register</h2></Link> 
         
-        <Link to="login"><h2>Login</h2></Link>
+
       
       </div>
     );

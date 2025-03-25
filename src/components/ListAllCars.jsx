@@ -26,6 +26,7 @@ export const ListAllCars = ({ appUser, cars }) => {
                 return (
                     <div key={index} className={styles.listedCar}>
                         <button className={isParked ? styles.parked : styles.notParked}
+                            aria-label={`Park car ${car.regPlate}`}
                             onClick={() => toggleParkThisCar(car.regPlate)} >
                             {isParked ? <FaStopCircle size={40} /> : <MdLocalParking  size={40} />}
                         </button>
