@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";  // Korrigera import från 'react-router' till 'react-router-dom'
 import { userAtom } from "../atoms/userAtom";
 import { ListAllCars } from "../components/ListAllCars";
+import styles from './user.module.css';
 
 
 const Home = () => {
@@ -28,7 +29,7 @@ const Home = () => {
       if (appUser.isParked[0])
          return <p>Car {appUser.isParked[0].regPlate} is parked -- add more stuff</p>
       else
-      return <ListAllCars appUser={appUser} setAppUser={setAppUser} cars={appUser.cars} />
+      return <div className={styles.userPage}><h2>My cars</h2><ListAllCars appUser={appUser} setAppUser={setAppUser} cars={appUser.cars} /></div>
     
 
   }

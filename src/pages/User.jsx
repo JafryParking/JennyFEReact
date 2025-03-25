@@ -11,6 +11,8 @@ import { ListParkingHistory } from '../components/ListParkingHistory.jsx';
 import { useAtom } from 'jotai';
 import { userAtom } from '../atoms/userAtom.jsx';
 import { ParkingTimer } from '../components/ParkingTimer.jsx';
+import { AddNewCar } from '../components/AddNewCar.jsx';
+import { showCarListAtom, showHistoryAtom } from '../atoms/userPreference.jsx';
 
 
 const User = () => {
@@ -40,8 +42,8 @@ const User = () => {
     }, [id]);
 
     const DisplayUserDetails = () => {
-        const [showHistory, setShowHistory] = useState(true);
-        const [showCars, setShowCars] = useState(true);
+        const [showCars, setShowCars] = useAtom(showCarListAtom);
+        const [showHistory, setShowHistory] = useAtom(showHistoryAtom);
         function toggleHistory(){
             setShowHistory(!showHistory);
         }
@@ -69,7 +71,11 @@ const User = () => {
                 </div>
                 {isLoading && <p className={styles.loadingMessage}>⏳ Loading...</p>}
                 {!isLoading && showHistory && <ListParkingHistory userHistory={appUser.parkingHistory} />}
-                {!isLoading && showCars && <ListAllCars appUser={appUser} setAppUser={setAppUser} cars={appUser.cars} />}
+                {!isLoading && showCars && <div id="cars" >
+                        <ListAllCars appUser={appUser} setAppUser={setAppUser} cars={appUser.cars} />
+                        {/* Also print form to add new car */}
+                        <AddNewCar userID={appUser.id} setShowCars={setShowCars} />
+                    </div>}
                 {!showCars && !showHistory && <p>Choose to show either History or Cars on the buttons above</p>}
             </>
         )
