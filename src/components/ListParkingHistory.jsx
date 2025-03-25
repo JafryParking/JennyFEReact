@@ -21,10 +21,12 @@ export const ListParkingHistory = ({userHistory}) => {
     const [history, setHistory] = useState();
     
     useEffect(()=>{
-        setHistory(userHistory);
+        setHistory( [...userHistory]
+            .sort((a, b) => new Date(b.endTime) - new Date(a.endTime))
+            .slice(0, 5));
     },[])
 
-    const [sortOption, setSortOption] = useState("regPlate"); // Default sort by date
+    const [sortOption, setSortOption] = useState("lastFive"); // Default sort by date
         
     const sortList = (option) => {
         setSortOption(option);
@@ -39,6 +41,11 @@ export const ListParkingHistory = ({userHistory}) => {
             case "dateRev":
                 sortedHistory = [...userHistory].sort((a, b) => new Date(a.endTime) - new Date(b.endTime));
                 break;
+            case "lastFive":
+                sortedHistory = [...userHistory]
+                        .sort((a, b) => new Date(b.endTime) - new Date(a.endTime))
+                        .slice(0, 5);
+                break;
             default:
                 sortedHistory = userHistory;
         }
@@ -51,9 +58,11 @@ export const ListParkingHistory = ({userHistory}) => {
         <section>
              <label className={styles.sortLabel} htmlFor="sortSelect">Sort by: 
              <select className={styles.sortSelect} value={sortOption} onChange={(e) => sortList(e.target.value)}>
+                <option value="lastFive">Last 5 parking periods</option>
                 <option value="date">Date Parked</option>
                 <option value="dateRev">Date Parked (oldest first)</option>
                 <option value="regPlate">Reg Plate</option>
+                
             </select>
             </label>
         <ul className={styles.parkingHistory}>
