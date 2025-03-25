@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { MdPayment } from "react-icons/md";
 import { formatDateTime, formatDoubleToKr } from '../formatHelpers/formatHelperFunctions';
 
-
 // -----------------------------------------------------------------------------
 //     Usage <ListParkingHistory userHistory={appUser.parkingHistory} />
 //
@@ -23,7 +22,6 @@ export const ListParkingHistory = ({userHistory}) => {
             .sort((a, b) => new Date(b.endTime) - new Date(a.endTime))
             .slice(0, 5));
     },[])
-
     
     const sortList = (option) => {
         setSortOption(option);
@@ -68,6 +66,6 @@ export const ListParkingHistory = ({userHistory}) => {
      </section>
     )}
     return (
-        <p>No parking history</p>
+        <section><p>No parking history</p></section>
     )
 }

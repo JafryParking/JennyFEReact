@@ -2,9 +2,13 @@ import { NavLink, Outlet, useLocation, useNavigate } from 'react-router';
 import { useState, useEffect } from 'react';
 import '../Navbar.css'; 
 import logo from '../assets/jafry_parking_logo.svg';
-
 import { useAtom } from 'jotai';
 import { userAtom } from '../atoms/userAtom';
+
+// -----------------------------------------------------------------------------
+//     Usage 
+// 
+// -----------------------------------------------------------------------------
 
 const Navbar = () => {
     const [appUser, setAppUser] = useAtom(userAtom);

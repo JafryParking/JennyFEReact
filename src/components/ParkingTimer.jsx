@@ -4,12 +4,21 @@ import axios from "axios";
 import { backendURL } from '../../config';
 import {  FaStopCircle} from "react-icons/fa";
 import { useTogglePark } from "./ToggleParking";
+import { formatDoubleToKr } from "../formatHelpers/formatHelperFunctions";
+
+// -----------------------------------------------------------------------------
+//     Usage <ParkingTimer isParkingActive={bool} regPlate={car.regPlate} />
+//
+//   Starts a timer when a user has clicked to park a car.  Fetches currently 
+//   owed from the back-end and updates. 
+// 
+//   To fix: Resets the timer if you reload the page
+// -----------------------------------------------------------------------------
 
 export const ParkingTimer = ({ isParkingActive, regPlate }) => {
     const [elapsedTime, setElapsedTime] = useState(0); // Time in seconds
     const [cost, setCost] = useState(0); // Dynamisk kostnad
     
-
     const togglePark = useTogglePark();
     const toggleParkThisCar = useCallback(() => togglePark(regPlate), [togglePark, regPlate]);
 
@@ -26,7 +35,7 @@ export const ParkingTimer = ({ isParkingActive, regPlate }) => {
                         console.error("Error fetching parking cost:", error);
                     });
             }, 1000);
-        } else {
+        } else { 
             clearInterval(interval);
         }
         return () => clearInterval(interval);
@@ -38,7 +47,7 @@ export const ParkingTimer = ({ isParkingActive, regPlate }) => {
     return (
         <div className={styles.timerContainer}>
             <p>Parking time: {minutes} min {seconds} sec</p>
-            <p>Cost: {new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(cost)} kr</p>
+            <p>Cost: {formatDoubleToKr(cost)} kr</p>
         
             <div className={styles.listedCar}>
                 <button className={styles.parked}
