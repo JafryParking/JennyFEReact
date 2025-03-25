@@ -39,7 +39,7 @@ export const Register = () => {
     },[appUser, newUser])
 
     return (
-        <div id="registerPage">
+        <div className="home-container">
             <h1>Register</h1>
             <NewUserForm setNewUser={setNewUser} />
         </div>
