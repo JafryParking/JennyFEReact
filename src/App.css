@@ -11,3 +11,16 @@
 h1 {
   font-size: 20px;
 }
+
+.home-container {
+  max-width: 500px;
+  width: 90vw;
+  min-height: 200px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background-color: #fbfbfb;
+  border-radius: 10px;
+}
