@@ -14,6 +14,12 @@ import { ParkingTimer } from '../components/ParkingTimer.jsx';
 import { AddNewCar } from '../components/AddNewCar.jsx';
 import { showCarListAtom, showHistoryAtom } from '../atoms/userPreference.jsx';
 
+// -----------------------------------------------------------------------------
+//   
+//   Shows all user details to user. Remembers setting to show the list
+//   of Cars or Parking History
+//   
+// -----------------------------------------------------------------------------
 
 const User = () => {
     const [ appUser, setAppUser ]  = useAtom(userAtom);
@@ -51,11 +57,14 @@ const User = () => {
         }
         return (
             <>
-                <h1 id={`user-${appUser.id}`}>{appUser.userName}</h1>
+                <h1>{appUser.userName}</h1>
 
+                {/* Toggle buttons to show/hide History and Car list  */}
                 <div className={styles.toggleButtonDiv}>
-                    <button className={showHistory ? styles.active:""} onClick={toggleHistory}><BsArchive size={40} /></button>
-                    <button className={showCars ? styles.active:""} onClick={toggleCarList}><MdDirectionsCar size={40} /></button>
+                    <button className={showHistory ? styles.active:""}
+                        onClick={toggleHistory}><BsArchive size={40} /></button>
+                    <button className={showCars ? styles.active:""}
+                        onClick={toggleCarList}><MdDirectionsCar size={40} /></button>
                 </div>
 
                 {/* Display parking timer if a car is currently parked */}

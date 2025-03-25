@@ -6,6 +6,13 @@ import { NewUserForm } from '../components/NewUserForm.jsx';
 import { useAtom } from 'jotai';
 import { userAtom } from '../atoms/userAtom.jsx';
 
+// -----------------------------------------------------------------------------
+// 
+//   Prints form for user-details to be entered, registers the user with the 
+//   backend if the email is unique - and then logs the user in and redirects
+//   to the User page
+// 
+// -----------------------------------------------------------------------------
 export const Register = () => {
     const navigate = useNavigate();
     const [appUser, setAppUser] = useAtom(userAtom);

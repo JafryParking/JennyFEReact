@@ -3,6 +3,7 @@ import { useAtom } from "jotai";
 import { userAtom } from "../atoms/userAtom";
 import { backendURL } from "../../config";
 import { formatDoubleToKr } from "../formatHelpers/formatHelperFunctions";
+
 // -----------------------------------------------------------------------------
 //     Usage const toggleParkThisCar = useTogglePark() 
 //       &   onClick={() => toggleParkThisCar(car.regPlate)} 
@@ -11,7 +12,6 @@ import { formatDoubleToKr } from "../formatHelpers/formatHelperFunctions";
 //   and pops up an alert when parking stopped and you have a fee total.
 //   
 // -----------------------------------------------------------------------------
-
 export const useTogglePark = () => {
     const [appUser, setAppUser] = useAtom(userAtom);
     

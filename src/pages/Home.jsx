@@ -1,16 +1,22 @@
 import { useAtom } from "jotai";
 import React from "react";
-import { Link } from "react-router-dom";  // Korrigera import från 'react-router' till 'react-router-dom'
+import { Link } from "react-router-dom";  
 import { userAtom } from "../atoms/userAtom";
 import { ListAllCars } from "../components/ListAllCars";
 import styles from './user.module.css';
 import { ParkingTimer } from "../components/ParkingTimer";
 
+// -----------------------------------------------------------------------------
+//  If we do not have a user logged in: show register or login links
+//  If we have a user show either: 
+//    1: Timer and currently parked car 
+//      or
+//    2: List of all a users cars
+// 
+// -----------------------------------------------------------------------------
 const Home = () => {
   const [appUser, setAppUser] = useAtom(userAtom);
-   
-
-  // appUser && console.log(appUser);
+  
   if (!appUser || appUser.id === 0 || appUser.id == undefined) {
     return (
       <div className="home-container">
@@ -31,9 +37,10 @@ const Home = () => {
           />
           </div>)
       else
-      return <div className={styles.userPage}><h2>My cars</h2><ListAllCars appUser={appUser} cars={appUser.cars} /></div>
-    
-
+      return <div className={styles.userPage}>
+              <h2>My cars</h2>
+              <ListAllCars appUser={appUser} cars={appUser.cars} />
+            </div>
   }
 
 };
