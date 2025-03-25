@@ -32,7 +32,8 @@ const Home = () => {
     );
   } else {
       if (appUser.isParked[0])
-         return (<div className={styles.userPage}>  
+         return (<div className={styles.userPage}>
+          <h1>My cars</h1>
           <ParkingTimer 
             isParkingActive={true} 
             regPlate={appUser.isParked[0].regPlate} 
@@ -40,7 +41,7 @@ const Home = () => {
           </div>)
       else
       return <div className={styles.userPage}>
-              <h2>My cars</h2>
+              <h1>My cars</h1>
               <ListAllCars appUser={appUser} cars={appUser.cars} />
             </div>
   }
