@@ -6,7 +6,7 @@ import { MdLocalParking } from "react-icons/md";
 import { useTogglePark } from "./ToggleParking";
 
 
-export const ListAllCars = ({ appUser, setAppUser, cars }) => {
+export const ListAllCars = ({ appUser, cars }) => {
     const [userCars, setUserCars] = useState([]);
     
     useEffect(() => {
@@ -33,8 +33,6 @@ export const ListAllCars = ({ appUser, setAppUser, cars }) => {
                     </div>
                 );
             })}
-
-
         </>
     );
 

@@ -27,7 +27,6 @@ const User = () => {
             axios.get(`${backendURL}/user/${id}`)
                 .then(response => {
                     setAppUser(response.data);
-                    sessionStorage.setItem("persistedUser", JSON.stringify(response.data));
                 })
                 .catch(error => {
                     console.error("Error fetching user data:", error);
@@ -72,7 +71,7 @@ const User = () => {
                 {isLoading && <p className={styles.loadingMessage}>⏳ Loading...</p>}
                 {!isLoading && showHistory && <ListParkingHistory userHistory={appUser.parkingHistory} />}
                 {!isLoading && showCars && <div id="cars" >
-                        <ListAllCars appUser={appUser} setAppUser={setAppUser} cars={appUser.cars} />
+                        <ListAllCars appUser={appUser} cars={appUser.cars} />
                         {/* Also print form to add new car */}
                         <AddNewCar userID={appUser.id} setShowCars={setShowCars} />
                     </div>}

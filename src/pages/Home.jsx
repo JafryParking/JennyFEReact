@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";  // Korrigera import från
 import { userAtom } from "../atoms/userAtom";
 import { ListAllCars } from "../components/ListAllCars";
 import styles from './user.module.css';
-
+import { ParkingTimer } from "../components/ParkingTimer";
 
 const Home = () => {
   const [appUser, setAppUser] = useAtom(userAtom);
@@ -27,9 +27,14 @@ const Home = () => {
     );
   } else {
       if (appUser.isParked[0])
-         return <p>Car {appUser.isParked[0].regPlate} is parked -- add more stuff</p>
+         return (<div className={styles.userPage}>  
+          <ParkingTimer 
+            isParkingActive={true} 
+            regPlate={appUser.isParked[0].regPlate} 
+          />
+          </div>)
       else
-      return <div className={styles.userPage}><h2>My cars</h2><ListAllCars appUser={appUser} setAppUser={setAppUser} cars={appUser.cars} /></div>
+      return <div className={styles.userPage}><h2>My cars</h2><ListAllCars appUser={appUser} cars={appUser.cars} /></div>
     
 
   }

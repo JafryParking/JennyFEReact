@@ -10,6 +10,9 @@ div.userPage {
   border-radius: 10px;
   box-shadow: 0px 4px 10px var(--box-shadow-color);
 }
+.timerContainer > p{
+  margin-left: 1em;
+}
 
 .sortLabel{
   margin-left: 40px;
