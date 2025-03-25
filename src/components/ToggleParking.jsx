@@ -6,9 +6,9 @@ import { backendURL } from "../../config";
 export const useTogglePark = () => {
     
     const [appUser, setAppUser] = useAtom(userAtom);
-    console.log(appUser.isParked)
+    
     const toggleParkThisCar = (regPlate) => {
-        console.log(regPlate);
+    
         let isParkedNow = appUser?.isParked?.some(parked => parked.regPlate === regPlate) || false;  
     
         if (!isParkedNow) {
