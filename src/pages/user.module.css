@@ -129,6 +129,15 @@ form > input:focus {
   border-color: var(--primary-color);
 }
 
+.formError {
+  font-size: 0.7em;
+  color: var(--primary-color);
+  margin: 0;
+  margin-left: auto;
+}
+.formError::before{
+  content: '! '
+}
 .toggleButtonDiv{
   display: flex;
   flex-direction: row;

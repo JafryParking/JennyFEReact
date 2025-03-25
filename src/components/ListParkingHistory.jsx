@@ -1,33 +1,30 @@
 import styles from '../pages/user.module.css';
 import { useEffect, useState } from 'react';
 import { MdPayment } from "react-icons/md";
+import { formatDateTime, formatDoubleToKr } from '../formatHelpers/formatHelperFunctions';
 
-function formatDateTime(dateString) {
-    let date = new Date(dateString);
-    let now = new Date();
-    let year = date.getFullYear();
-    let month = date.toLocaleString('en-US', { month: 'short' }); 
-    let day = date.getDate();
-    let hours = date.getHours().toString().padStart(2, '0'); // Ensure two-digits
-    let minutes = date.getMinutes().toString().padStart(2, '0'); // Ensure two-digits
-    // If the year is the current year, omit it
-    let showYear = year !== now.getFullYear();
-    // Format string based on condition
-    return showYear
-        ? `${month} ${day}, ${year} @ ${hours}:${minutes}`
-        : `${month} ${day} @ ${hours}:${minutes}`;
-}
+
+// -----------------------------------------------------------------------------
+//     Usage <ListParkingHistory userHistory={appUser.parkingHistory} />
+//
+//  Prints out the list of parking history of a user. Adds a drop down sorting
+//  option to display the list sorted by carPlate or date parked.
+// 
+//  Default sorting option: show only the five latest parking periods
+// -----------------------------------------------------------------------------
+
 export const ListParkingHistory = ({userHistory}) => {
     const [history, setHistory] = useState();
-    
+    const [sortOption, setSortOption] = useState("lastFive"); // Default sort 
+
+    // Default sort on mount - last five parking periods.
     useEffect(()=>{
         setHistory( [...userHistory]
             .sort((a, b) => new Date(b.endTime) - new Date(a.endTime))
             .slice(0, 5));
     },[])
 
-    const [sortOption, setSortOption] = useState("lastFive"); // Default sort by date
-        
+    
     const sortList = (option) => {
         setSortOption(option);
     
@@ -42,14 +39,11 @@ export const ListParkingHistory = ({userHistory}) => {
                 sortedHistory = [...userHistory].sort((a, b) => new Date(a.endTime) - new Date(b.endTime));
                 break;
             case "lastFive":
-                sortedHistory = [...userHistory]
-                        .sort((a, b) => new Date(b.endTime) - new Date(a.endTime))
-                        .slice(0, 5);
+                sortedHistory = [...userHistory].sort((a, b) => new Date(b.endTime) - new Date(a.endTime)).slice(0, 5);
                 break;
             default:
                 sortedHistory = userHistory;
         }
-    
         setHistory(sortedHistory);
     };
     
@@ -65,9 +59,9 @@ export const ListParkingHistory = ({userHistory}) => {
             </select>
             </label>
         <ul className={styles.parkingHistory}>
-            {history.map((park, index) => { 
+            {history.map((park) => { 
                 return (            
-                    <li key={index}><em>{park.parkedCar.regPlate} <MdPayment size="14"/> {new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(park.parkingFee)} kr</em>: {formatDateTime(park.startTime)} - {formatDateTime(park.endTime)}  </li>
+                    <li key={park.startTime}><em>{park.parkedCar.regPlate} <MdPayment size="14"/> {formatDoubleToKr(park.parkingFee)} kr</em>: {formatDateTime(park.startTime)} - {formatDateTime(park.endTime)}  </li>
                 )
             })}
         </ul>
