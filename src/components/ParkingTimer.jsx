@@ -1,15 +1,17 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styles from '../pages/user.module.css';
 import axios from "axios";
 import { backendURL } from '../../config';
-import { useAtom } from "jotai";
-import { userAtom } from "../atoms/userAtom";
 import {  FaStopCircle} from "react-icons/fa";
+import { useTogglePark } from "./ToggleParking";
 
 export const ParkingTimer = ({ isParkingActive, regPlate }) => {
     const [elapsedTime, setElapsedTime] = useState(0); // Time in seconds
     const [cost, setCost] = useState(0); // Dynamisk kostnad
-    const [appUser, setAppUser] = useAtom(userAtom);
+    
+
+    const togglePark = useTogglePark();
+    const toggleParkThisCar = useCallback(() => togglePark(regPlate), [togglePark, regPlate]);
 
     useEffect(() => {
         let interval = null;
@@ -40,7 +42,7 @@ export const ParkingTimer = ({ isParkingActive, regPlate }) => {
         
             <div className={styles.listedCar}>
                 <button className={styles.parked}
-                     onClick={() => toggleParkThisCar({regPlate})}>
+                     onClick={toggleParkThisCar}>
                         <FaStopCircle size={40} /> 
                 </button>
                 <div className={styles.carParked}>{regPlate}</div></div>
