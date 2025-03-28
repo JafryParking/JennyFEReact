@@ -96,6 +96,9 @@ button.active:hover {
   margin-bottom: 0.3em;
 }
 
+.notUpToDate {
+  color: red;
+}
 .listedCar > button:hover {
   transform: scale(1.1);
 }

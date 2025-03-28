@@ -18,7 +18,7 @@ import { formatDoubleToKr } from "../formatHelpers/formatHelperFunctions";
 export const ParkingTimer = ({ isParkingActive, car }) => {
     const [elapsedTime, setElapsedTime] = useState(0); // Time in seconds
     const [cost, setCost] = useState(0); // Dynamisk kostnad
-    
+    const [upToDate, setUpToDate] = useState(true);
     const togglePark = useTogglePark();
     const toggleParkThisCar = useCallback(() => togglePark(car), [togglePark, car]);
 
@@ -30,9 +30,11 @@ export const ParkingTimer = ({ isParkingActive, car }) => {
                 axios.get(`${backendURL}/currentlyParked/${car.regPlate}`)
                     .then(response => {
                         setCost(response.data);
+                        setUpToDate(true);
                     })
-                    .catch(error => {
-                        console.error("Error fetching parking cost:", error);
+                    .catch((error) => {
+                        console.log(error);
+                        setUpToDate(false);
                     });
             }, 1000);
         } else { 
@@ -47,7 +49,7 @@ export const ParkingTimer = ({ isParkingActive, car }) => {
     return (
         <div className={styles.timerContainer}>
             <p>Parking time: {minutes} min {seconds} sec</p>
-            <p>Cost: {formatDoubleToKr(cost)} kr</p>
+            <p className={upToDate ? undefined : "notUpToDate"}>Cost: {formatDoubleToKr(cost)} kr {upToDate ? undefined : "Cost not accurate"}</p>
         
             <div className={styles.listedCar}>
                 <button className={styles.parked}
