@@ -79,11 +79,13 @@ const User = () => {
                 </div>
                 {isLoading && <p className={styles.loadingMessage}>⏳ Loading...</p>}
                 {!isLoading && showHistory && <ListParkingHistory userHistory={appUser.parkingHistory} />}
-                {!isLoading && showCars && <div id="cars" >
+                <div id="cars" >
+                    {!isLoading && showCars && 
                         <ListAllCars appUser={appUser} cars={appUser.cars} />
-                        {/* Also print form to add new car */}
-                        <AddNewCar userID={appUser.id}/>
-                    </div>}
+                    }
+                    {/* Also print form to add new car */}
+                    <AddNewCar userID={appUser.id}/>
+                </div>
                 {!showCars && !showHistory && <p>Choose to show either History or Cars on the buttons above</p>}
             </>
         )
