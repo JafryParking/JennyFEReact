@@ -15,19 +15,19 @@ import { formatDoubleToKr } from "../formatHelpers/formatHelperFunctions";
 //   To fix: Resets the timer if you reload the page
 // -----------------------------------------------------------------------------
 
-export const ParkingTimer = ({ isParkingActive, regPlate }) => {
+export const ParkingTimer = ({ isParkingActive, car }) => {
     const [elapsedTime, setElapsedTime] = useState(0); // Time in seconds
     const [cost, setCost] = useState(0); // Dynamisk kostnad
     
     const togglePark = useTogglePark();
-    const toggleParkThisCar = useCallback(() => togglePark(regPlate), [togglePark, regPlate]);
+    const toggleParkThisCar = useCallback(() => togglePark(car), [togglePark, car]);
 
     useEffect(() => {
         let interval = null;
-        if (isParkingActive && regPlate) {
+        if (isParkingActive && car.regPlate) {
             interval = setInterval(() => {
                 setElapsedTime(prev => prev + 1);
-                axios.get(`${backendURL}/currentlyParked/${regPlate}`)
+                axios.get(`${backendURL}/currentlyParked/${car.regPlate}`)
                     .then(response => {
                         setCost(response.data);
                     })
@@ -39,7 +39,7 @@ export const ParkingTimer = ({ isParkingActive, regPlate }) => {
             clearInterval(interval);
         }
         return () => clearInterval(interval);
-    }, [isParkingActive, regPlate]);
+    }, [isParkingActive, car]);
 
     const minutes = Math.floor(elapsedTime / 60);
     const seconds = elapsedTime % 60;
@@ -54,7 +54,7 @@ export const ParkingTimer = ({ isParkingActive, regPlate }) => {
                      onClick={toggleParkThisCar}>
                         <FaStopCircle size={40} /> 
                 </button>
-                <div className={styles.carParked}>{regPlate}</div></div>
+                <div className={styles.carParked}>{car.regPlate} {car.name}</div></div>
         </div>
     );
 };

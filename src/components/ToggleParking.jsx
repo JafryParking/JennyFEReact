@@ -6,7 +6,7 @@ import { formatDoubleToKr } from "../formatHelpers/formatHelperFunctions";
 
 // -----------------------------------------------------------------------------
 //     Usage const toggleParkThisCar = useTogglePark() 
-//       &   onClick={() => toggleParkThisCar(car.regPlate)} 
+//       &   onClick={() => toggleParkThisCar(car)} 
 // 
 //   Custom hook to start and stop parking of a car. Sends to back-end 
 //   and pops up an alert when parking stopped and you have a fee total.
@@ -15,15 +15,15 @@ import { formatDoubleToKr } from "../formatHelpers/formatHelperFunctions";
 export const useTogglePark = () => {
     const [appUser, setAppUser] = useAtom(userAtom);
     
-    const toggleParkThisCar = (regPlate) => {
+    const toggleParkThisCar = (car) => {
     
-        let isParkedNow = appUser?.isParked?.some(parked => parked.regPlate === regPlate) || false;  
+        let isParkedNow = appUser?.isParked?.some(parked => parked.regPlate === car.regPlate) || false;  
     
         if (!isParkedNow) {
             // Start parking
             axios.post(`${backendURL}/startParking`, {
                 userID: appUser.id,
-                regPlate: regPlate
+                regPlate: car.regPlate
             })
             .then(response => {
                 setAppUser(response.data);
@@ -33,7 +33,7 @@ export const useTogglePark = () => {
             });
         } else {
             // Stop parking
-            axios.get(`${backendURL}/stopParking/${regPlate}`)
+            axios.get(`${backendURL}/stopParking/${car.regPlate}`)
                 .then(response => {
                     let fee = formatDoubleToKr(response.data.fee);
                     alert(`${fee} kr added to your account.`);

@@ -71,7 +71,7 @@ const User = () => {
                 {appUser?.isParked && appUser.isParked.length > 0 && (
                     <ParkingTimer 
                         isParkingActive={true} 
-                        regPlate={appUser.isParked[0].regPlate} 
+                        car={appUser.isParked[0]} 
                     />
                 )}
                 <div>
