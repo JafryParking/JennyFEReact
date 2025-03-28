@@ -13,6 +13,7 @@ import { userAtom } from '../atoms/userAtom.jsx';
 import { ParkingTimer } from '../components/ParkingTimer.jsx';
 import { AddNewCar } from '../components/AddNewCar.jsx';
 import { showCarListAtom, showHistoryAtom } from '../atoms/userPreference.jsx';
+import { formatDoubleToKr } from '../formatHelpers/formatHelperFunctions.js';
 
 // -----------------------------------------------------------------------------
 //   
@@ -75,7 +76,7 @@ const User = () => {
                     />
                 )}
                 <div>
-                    <p className={styles.parkingFee}>Parking Fees: {new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(appUser.parkingFeesOwed)} kr</p>
+                    <p className={styles.parkingFee}>Parking Fees: {formatDoubleToKr(appUser.parkingFeesOwed)} kr</p>
                 </div>
                 {isLoading && <p className={styles.loadingMessage}>⏳ Loading...</p>}
                 {!isLoading && showHistory && <ListParkingHistory userHistory={appUser.parkingHistory} />}
