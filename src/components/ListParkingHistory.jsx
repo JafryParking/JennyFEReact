@@ -18,7 +18,7 @@ export const ListParkingHistory = ({userHistory}) => {
 
     // Default sort on mount - last five parking periods.
     useEffect(()=>{
-        setHistory( [...userHistory]
+        userHistory && setHistory( [...userHistory]
             .sort((a, b) => new Date(b.endTime) - new Date(a.endTime))
             .slice(0, 5));
     },[])
@@ -51,20 +51,15 @@ export const ListParkingHistory = ({userHistory}) => {
              <label className={styles.sortLabel} htmlFor="sortSelect">Sort by: 
              <select className={styles.sortSelect} value={sortOption} onChange={(e) => sortList(e.target.value)}>
                 <option value="lastFive">Last 5 parking periods</option>
-                <option value="date">Date Parked</option>
-                <option value="dateRev">Date Parked (oldest first)</option>
-                <option value="regPlate">Reg Plate</option>
+                <option value="date">List all by Date Parked</option>
+                <option value="dateRev">List all by Date Parked (oldest first)</option>
+                <option value="regPlate">List all by Reg Plate</option>
             </select>
             </label>
         <ul className={styles.parkingHistory}>
             {history.map((park) => { 
                 return (            
-                    // <li key={park.startTime}>
-                    //     <em>{park.parkedCar.regPlate} </em>
-                    //     <em><MdPayment size="14"/> {formatDoubleToKr(park.parkingFee)} kr</em> : 
-                    //     {formatDateTime(park.startTime)} - {formatDateTime(park.endTime)}  
-                    // </li>
-                    <li key={park.startTime} className={styles.parkingGrid}>
+                         <li key={park.startTime} className={styles.parkingGrid}>
                         <span className={styles.regPlate}> 
                             <MdDirectionsCar size="14"/> {park.parkedCar.regPlate}</span>
                         <span className={styles.parkingFee}>

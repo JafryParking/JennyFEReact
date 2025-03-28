@@ -31,7 +31,7 @@ export const ListAllCars = ({ appUser, cars }) => {
                             {isParked ? <FaStopCircle size={40} /> : <MdLocalParking  size={40} />}
                         </button>
                         <div className={isParked ? styles.carParked : styles.carNotParked}>
-                            {car.regPlate}
+                            {car.regPlate} {car.name ? car.name : ''}
                         </div>
                     </div>
                 );

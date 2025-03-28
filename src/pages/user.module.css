@@ -27,6 +27,7 @@ div.userPage {
   border-radius: 5px;
   border: 1px dotted;
 }
+
 /* Historia för parkering (kan fyllas med mer stil senare) */
 .parkingHistory {
   margin-bottom: 1rem;
