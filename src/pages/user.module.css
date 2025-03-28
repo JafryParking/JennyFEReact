@@ -161,14 +161,15 @@ form {
   gap: 1rem;
 }
 
-form > input {
+/* form > input { */
+input {
   padding: 0.8em;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 1rem;
 }
 
-form > input:focus {
+input:focus {
   outline: none;
   border-color: var(--primary-color);
 }

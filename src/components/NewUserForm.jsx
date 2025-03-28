@@ -22,7 +22,10 @@ export const NewUserForm = ({ setNewUser }) => {
                     {errors.password && <p className={styles.formError}>Password field must be filled in</p>}
                 <input placeholder='Email' type="email" {...register("email", {required: true})}/>
                     {errors.email && <p className={styles.formError}>Email field must be filled in</p>}
-                <input placeholder='Licence plate' type="text" {...register("regPlate")}/>
+                <div>
+                    <input placeholder='Licence plate' type="text" {...register("regPlate")}/>
+                    <input placeholder='Car nickname' type="text" {...register("name")}/>
+                </div>
                 <input type="submit" value="Add new User"/>
             </form>
         </div>
